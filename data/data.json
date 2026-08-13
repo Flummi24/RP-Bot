@@ -1,0 +1,12 @@
+{
+    "use-container": true,
+    "ticket": {
+        "panel-format": "Hallo {username}.\n Willkommen im Ticket Support",
+        "channel-format": "ticket-{username}"
+    },
+    "roblox": {
+        "group-id": 123456789,
+        "admin-role": 255,
+        "format": "123"
+    }
+}
