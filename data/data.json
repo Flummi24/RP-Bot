@@ -1,7 +1,7 @@
 {
     "http-server": {
         "enabled": false,
-        "port": 80
+        "port": 3000
     },
     "discord": {
         "status": "EH RP Bot",
