@@ -1,5 +1,8 @@
 {
-    "use-container": true,
+    "discord": {
+        "status": "EH RP Bot",
+        "use-container": true
+    },
     "ticket": {
         "panel-format": "Hallo {username}.\n Willkommen im Ticket Support",
         "channel-format": "ticket-{username}"
