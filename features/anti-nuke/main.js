@@ -1,4 +1,5 @@
 const data = require("../../data/data.json")
+const output = require("../../utils/output.js")
 
 const { AuditLogEvent } = require("discord.js")
 
@@ -11,11 +12,11 @@ module.exports = (client) => {
     });
     
     if (data.logging.enabled === true && data.logging["anti-nuke"]) {
-        if (data.discord["use-container"]) {
-            return;
-        } else {
+        const channel = await client.channels.fetch(data.logging.channel);
 
-        }
+        const embed = output('Anti Nuke', '\n**User**: ')
+
+        channel.send(embeds: [])
     }
 
     const logs = await member.guild.fetchAuditLogs({
@@ -24,26 +25,16 @@ module.exports = (client) => {
     })
 
     const entry = logs.entries.first();
-   
-
     if (!entry) return;
-
     const inviter = entry.executor;
-
-    console.log(
-        `${inviter.tag} hat den Bot ${member.user.tag} eingeladen`
-    );
-
 
 try {
 
-    // Optional: Einlader bannen
     const inviterMember = await member.guild.members.fetch(inviter.id);
 
     await inviterMember.ban({
         reason: 'Sicherheitsban'
     });
-       console.log(`ANTI NUKE: Der User ${inviter.tag} wurde Gebannt`)
 
 } catch (error) {
 console.log(error.message)

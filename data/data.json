@@ -14,6 +14,8 @@
         "channel-format": "ticket-{username}"
     },
     "roblox": {
+        "enabled": false,
+        "cookie": "123",
         "group-id": 123456789,
         "admin-role": 255,
         "format": "123"
