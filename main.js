@@ -16,3 +16,6 @@
     console.log("[UPDATE] Es ist ein Fehler bei der Überprüfung von Updates aufgetreten!")
 }
 })
+
+
+const client = require("./init/client.js")
