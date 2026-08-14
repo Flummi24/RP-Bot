@@ -12,7 +12,13 @@ api.post("/api/sql", async (req, res) => {
 });
 
 api.post("/api/login", async (req, res) => {
-    return;
+    db.run(`
+                CREATE TABLE IF NOT EXISTS users (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    username TEXT NOT NULL,
+                    password TEXT NOT NULL
+                )
+            `);
 });
 
 
