@@ -5,7 +5,7 @@ const db = require("../../utils/database.js")
 
 const api = express();
 api.use(express.json());
-api.use(express.static(path.join(__dirname, "src")));
+api.use(express.static(path.join(__dirname, "../src")));
 
 
 

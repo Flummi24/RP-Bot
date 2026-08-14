@@ -94,6 +94,11 @@
         if (data.error === "500") return alert("Fehler beim Login")
 
         if (data.token) {
+            const user = {
+              username: document.getElementById("username").value,
+              token: data.token
+            };
+            localStorage.setItem("user", JSON.stringify(user));
             window.location.href = "/dashboard.html";
         } else {
             return alert("Username oder Passwort falsch")
