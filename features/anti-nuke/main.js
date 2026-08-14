@@ -1,5 +1,7 @@
 const data = require("../../data/data.json")
 
+const { AuditLogEvent } = require("discord.js")
+
 module.exports = (client) => {
     client.on('guildMemberAdd', async (member) => {
     if (!member.user.bot) return;
@@ -12,14 +14,14 @@ module.exports = (client) => {
         if (data.discord["use-container"]) {
             return;
         } else {
-            
+
         }
     }
 
     const logs = await member.guild.fetchAuditLogs({
         type: 28,
         limit: 1
-    });
+    })
 
     const entry = logs.entries.first();
    
