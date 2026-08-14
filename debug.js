@@ -1,9 +1,9 @@
 const db = require("./utils/database.js")
 
-db.run(`
-                CREATE TABLE IF NOT EXISTS users (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    username TEXT NOT NULL,
-                    password TEXT NOT NULL
-                )
-            `);
+db.run(
+    "INSERT INTO users (username, password) VALUES (?, ?)",
+    ["admin", "admin"],
+    function (err) {
+        console.log(this.lastID);
+    }
+);
