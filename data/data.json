@@ -1,4 +1,5 @@
 {
+    "server-name": "German RP",
     "http-server": {
         "enabled": false,
         "port": 3000
