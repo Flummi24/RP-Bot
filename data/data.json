@@ -1,6 +1,6 @@
 {
     "http-server": {
-        "enabled": true,
+        "enabled": false,
         "port": 80
     },
     "discord": {
@@ -15,5 +15,11 @@
         "group-id": 123456789,
         "admin-role": 255,
         "format": "123"
+    },
+    "features": {
+        "anti-nuke": {
+            "enabled": false,
+            "excluded-role-id": 123456789
+        }
     }
 }
