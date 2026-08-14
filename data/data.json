@@ -5,7 +5,9 @@
     },
     "discord": {
         "status": "EH RP Bot",
-        "use-container": true
+        "use-container": true,
+        "use-footer": false,
+        "footer-url": ""
     },
     "ticket": {
         "panel-format": "Hallo {username}.\n Willkommen im Ticket Support",
@@ -21,5 +23,10 @@
             "enabled": false,
             "excluded-role-id": 123456789
         }
+    },
+    "logging": {
+        "enabled": false,
+        "channel-id": 123456789,
+        "anti-nuke": true
     }
 }
