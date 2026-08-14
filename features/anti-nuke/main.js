@@ -10,14 +10,6 @@ module.exports = (client) => {
     await member.ban({
         reason: 'Anti Nuke'
     });
-    
-    if (data.logging.enabled === true && data.logging["anti-nuke"]) {
-        const channel = await client.channels.fetch(data.logging.channel);
-
-        const embed = output('Anti Nuke', '\n**User**: ')
-
-        channel.send(embeds: [])
-    }
 
     const logs = await member.guild.fetchAuditLogs({
         type: 28,
@@ -28,16 +20,26 @@ module.exports = (client) => {
     if (!entry) return;
     const inviter = entry.executor;
 
+    if (data.logging.enabled === true && data.logging["anti-nuke"]) {
+        const channel = await client.channels.fetch(data.logging.channel);
+
+        const message = output('Anti Nuke', `\n**User**: <@${inviter.id}>\n**Bot**: <@${member.id}>\n**Aktionen**: Ban`)
+
+        channel.send({ embeds: [message] })
+    }
+
 try {
 
     const inviterMember = await member.guild.members.fetch(inviter.id);
 
     await inviterMember.ban({
-        reason: 'Sicherheitsban'
+        reason: 'Anti Nuke'
     });
 
 } catch (error) {
-console.log(error.message)
+console.log(error)
 }
+
 });
+
 };
