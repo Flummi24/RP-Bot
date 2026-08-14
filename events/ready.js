@@ -1,4 +1,6 @@
 const data = require("../data/data.json")
+const builder = require("../commands/builder.js")
+const deploy = require("../utils/deploy.js")
 
 module.exports = (client) => {
     client.once('clientReady', async () => {
