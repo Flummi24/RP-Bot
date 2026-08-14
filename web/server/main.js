@@ -42,14 +42,4 @@ api.post("/api/login", async (req, res) => {
 });
 
 
-const server = api.listen(data["http-server"].port, () => {
-    console.log(1)
-});
-
-server.on("error", (err) => {
-    console.error("SERVER ERROR:", err);
-});
-
-server.on("close", () => {
-    console.log("SERVER WURDE GESCHLOSSEN");
-});
+const server = api.listen(data["http-server"].port, () => {});
