@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+
+    <style>
+        * {
+    font-family: Arial, sans-serif;
+}
+        body {
+            background-color: #101214;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #1d1f21;
+            border: 1px solid #414346;
+            border-radius: 7px;
+            padding: 5%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+            width: 25%;
+            min-height: 50%;
+        }
+
+        .container h1 {
+            color: white;
+            font-weight: bold;
+        }
+
+        .container label {
+            color: white;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .container input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+
+            background-color: #101214;
+            border: 1px solid #414346;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .container input:focus {
+            outline: none;
+            border-color: #666;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 12px;
+
+            background-color: #1d1f21;
+            border: 1px solid #414346;
+            border-radius: 5px;
+            border-color: white;
+
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            background-color: #1d1f21;
+        }
+    </style>
+    <script>
+        async function login() {
+            const res = await fetch("/api/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: document.getElementById("username").value,
+                password: document.getElementById("password").value
+            })
+        });
+
+        const data = await res.json()
+
+        if (data.error === "500") return alert("Fehler beim Login")
+
+        if (data.token) {
+            window.location.href = "/dashboard.html";
+        } else {
+            return alert("Username oder Passwort falsch")
+        }
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Login</h1>
+
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Username">
+
+        <label for="password">Passwort</label>
+        <input type="password" id="password" placeholder="Passwort">
+
+        <button onclick="login()" class="login-button">Login</button>
+    </div>
+
+</body>
+</html>
