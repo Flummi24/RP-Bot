@@ -14,8 +14,8 @@ try {
   Routes.applicationCommands(CLIENT_ID),
   { body: commands }
 )
-} catch (error) {
-await console.log(`Error beim Registrieren von den Slash Commmands bei Server: Main. Error: ${error}`)
+} catch (err) {
+    throw new Error(`Fehler beim Deploy von den Slash Commands! Error: ${err}`)
 }
 }
 

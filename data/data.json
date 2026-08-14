@@ -1,4 +1,8 @@
 {
+    "http-server": {
+        "enabled": true,
+        "port": 80
+    },
     "discord": {
         "status": "EH RP Bot",
         "use-container": true
