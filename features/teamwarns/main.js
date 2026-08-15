@@ -2,16 +2,6 @@ const db = require("../../utils/database.js")
 const data = require("../../data/data.json")
 const output = require("../../utils/output.js")
 
-db.run(`
-    CREATE TABLE IF NOT EXISTS tw (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user TEXT,
-        reason TEXT,
-        von TEXT,
-        datum TEXT
-    )
-`);
-
 module.exports = async (client) => {
     console.log("[Teamwarns] Loading")
     client.on('interactionCreate', async interaction => {
