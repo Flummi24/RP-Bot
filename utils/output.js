@@ -3,9 +3,9 @@ const data = require("../data/data.json")
 
 async function output(title, content, color) {
     if (data.discord["use-container"]) {
-        return cbuilder(title, content)
+        return { flags: 1 << 15, components: cbuilder(title, content) }
     } else {
-        return ebuilder(title, content, color)
+        return { embeds: [ebuilder(title, content, color)] }
     }
 }
 

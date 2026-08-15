@@ -1,5 +1,6 @@
 {
     "server-name": "German RP",
+    "admin-role": 123456789,
     "http-server": {
         "enabled": true,
         "port": 3000
@@ -33,6 +34,7 @@
     "logging": {
         "enabled": false,
         "channel-id": 123456789,
-        "anti-nuke": true
+        "anti-nuke": true,
+        "commands": true
     }
 }
