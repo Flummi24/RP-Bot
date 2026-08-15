@@ -3,22 +3,24 @@ const path = require("path")
 const data = require("../../data/data.json")
 const db = require("../../utils/database.js")
 
+console.log("[Web Server] Loading")
+
 const api = express();
 api.use(express.json());
 api.use(express.static(path.join(__dirname, "../src")));
 
-
-
-api.post("/api/login", async (req, res) => {
-    const { username, password } = req.body;
-
-    db.run(`
+db.run(`
                 CREATE TABLE IF NOT EXISTS users (
                     username TEXT NOT NULL UNIQUE,
                     password TEXT NOT NULL,
                     token TEXT NOT NULL
                 )
             `);
+
+
+
+api.post("/api/login", async (req, res) => {
+    const { username, password } = req.body;
 
     db.get(
     "SELECT * FROM users WHERE username = ?",
@@ -42,4 +44,6 @@ api.post("/api/login", async (req, res) => {
 });
 
 
-const server = api.listen(data["http-server"].port, () => {});
+const server = api.listen(data["http-server"].port, () => {
+    console.log("[Web Server] Ready")
+});

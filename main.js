@@ -21,5 +21,11 @@ const utils = require("./features/messages/main.js")
 utils(client)
 }
 
+
+if (data["http-server"].enabled) {
+    const web = require("./web/server/main.js")
+    
+}
+
 const TOKEN = process.env.TOKEN;
 client.login(TOKEN)
