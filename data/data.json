@@ -1,7 +1,7 @@
 {
     "server-name": "German RP",
     "http-server": {
-        "enabled": false,
+        "enabled": true,
         "port": 3000
     },
     "discord": {
@@ -9,10 +9,6 @@
         "use-container": true,
         "use-footer": false,
         "footer-url": ""
-    },
-    "ticket": {
-        "panel-format": "Hallo {username}.\n Willkommen im Ticket Support",
-        "channel-format": "ticket-{username}"
     },
     "roblox": {
         "enabled": false,
@@ -25,6 +21,15 @@
         "anti-nuke": {
             "enabled": false,
             "excluded-role-id": 123456789
+        },
+        "auto-nickname": {
+            "enabled": false,
+            "status": "NICHT VERFÜGBAR"
+        },
+        "online-list": {
+            "enabled": false,
+            "channels": [],
+            "formart": "# Online Liste\n**Online mit Rechten**\n{ONLINE_MIT_RECHTEN}"
         }
     },
     "logging": {

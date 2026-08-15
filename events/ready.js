@@ -4,7 +4,7 @@ const deploy = require("../utils/deploy.js")
 
 module.exports = (client) => {
     client.once('clientReady', async () => {
-  console.log(`Eingeloggt als ${client.user.tag}`);
+  console.log(`Bot Gestartet als ${client.user.tag}`);
 
 client.user.setPresence({
     activities: [
