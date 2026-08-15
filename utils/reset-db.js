@@ -42,7 +42,7 @@ await db.run(`
 
 
   // Standart Admin User Erstellen
-  const token = crypto.randomBytes(128).toString("hex");
+  const token = crypto.randomBytes(64).toString("hex");
   await db.run(
     "INSERT INTO users (username, password, token) VALUES (?, ?, ?)",
     ["admin", "admin", token],

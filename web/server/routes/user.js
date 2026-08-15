@@ -5,7 +5,7 @@ module.exports = async (api) => {
     api.post("/api/user/add", async (req, res) => {
     const { username, password, auth } = req.body;
 
-    const token = crypto.randomBytes(128).toString("hex");
+    const token = crypto.randomBytes(64).toString("hex");
 
     await db.get(
     "SELECT * FROM users WHERE token = ?",
