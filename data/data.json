@@ -22,7 +22,7 @@
         "online-list": {
             "enabled": false,
             "channels": [],
-            "formart": "# Online Liste\n**Online mit Rechten**\n{ONLINE_MIT_RECHTEN}\n**Online Ohne Rechte**\n{ONLINE_OHNE_RECHTE}",
+            "formart": "# Online Liste\n**Online mit Rechten**\n{ONLINE_MIT_RECHTEN}\n**Online Ohne Rechte**\n{ONLINE_OHNE_RECHTE}\n**Online Auf Roblox**\n{ONLINE_ROBLOX}\n**Unbekannt**\n{UNBEKANNT}",
             "game-id": "",
             "cookie": "123",
             "group-id": 123456789,

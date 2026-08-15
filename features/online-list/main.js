@@ -153,3 +153,37 @@ for (const presence of data1.userPresences) {
         unknownAdmins.push(ic_rechte_user.get(presence.userId));
     }
 }
+
+
+// Building List
+
+function buildList(users) {
+    if (!users || users.length === 0) {
+        return "*Keine Benutzer gefunden*";
+    }
+
+    return users
+        .filter(Boolean)
+        .map(name => `- ${name}`)
+        .join("\n");
+}
+
+const timestamp = Math.floor(Date.now() / 1000);
+        
+const text999 = data.features["online-list"]["formart"]
+const real = text999
+.replace("{ONLINE_MIT_RECHTEN}", buildList(ingameAdmins))
+.replace("{ONLINE_OHNE_RECHTE}", buildList(ohneAdmins))
+.replace("{ONLINE_ROBLOX}", buildList(robloxAdmins))
+.replace("{UNBEKANNT}", buildList(unknownAdmins));
+        
+        const container = new ContainerBuilder()
+  .addTextDisplayComponents(
+    new TextDisplayBuilder()
+      .setContent(text999)
+  );
+   container.addMediaGalleryComponents(
+    new MediaGalleryBuilder().addItems(item =>
+      item.setURL(footer)
+    )
+  )
