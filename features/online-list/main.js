@@ -1,5 +1,9 @@
 const data = require("../../data/data.json")
 const GAME_ID = data.features["online-list"]["game-id"]
+const output = require("../../utils/output.js")
+
+async function update() {
+
 const ingameAdmins = [];
 const ohneAdmins = []
 const robloxAdmins = [];
@@ -175,15 +179,20 @@ const real = text999
 .replace("{ONLINE_MIT_RECHTEN}", buildList(ingameAdmins))
 .replace("{ONLINE_OHNE_RECHTE}", buildList(ohneAdmins))
 .replace("{ONLINE_ROBLOX}", buildList(robloxAdmins))
-.replace("{UNBEKANNT}", buildList(unknownAdmins));
+.replace("{UNBEKANNT}", buildList(unknownAdmins))
+.replace("{TIMESTAMP}", `<t:${timestamp}:R>`);
+
+const split = text999.split("\n");
         
-        const container = new ContainerBuilder()
-  .addTextDisplayComponents(
-    new TextDisplayBuilder()
-      .setContent(text999)
-  );
-   container.addMediaGalleryComponents(
-    new MediaGalleryBuilder().addItems(item =>
-      item.setURL(footer)
-    )
-  )
+const message = output(split[0], real, "Green")
+
+for (const id of data.features["online-list"]["channels"]) {
+    const channel = await client.channels.fetch(id)
+
+    if (data.discord["use-container"]) {
+            channel.send({ flags: 1 << 15, components: [message] });
+    } else {
+        channel.send({ embeds: [message] })
+    }
+}
+}
