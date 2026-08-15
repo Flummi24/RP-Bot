@@ -2,7 +2,7 @@ const data = require("../../data/data.json")
 const GAME_ID = data.features["online-list"]["game-id"]
 const output = require("../../utils/output.js")
 
-async function update() {
+async function update(client) {
 
 const ingameAdmins = [];
 const ohneAdmins = []
@@ -196,3 +196,5 @@ for (const id of data.features["online-list"]["channels"]) {
     }
 }
 }
+
+module.exports = update;
