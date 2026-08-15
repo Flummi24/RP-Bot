@@ -112,18 +112,15 @@ return false
 } // generate Handler ende
 
 async function create(username, name, geburt) {
-  const token = crypto.randomBytes(64).toString("hex");
-
-  pkw, lkw, motorrad, waffe_klein, waffe_groß
-
-  await db.run(
+  db.run(
     "INSERT INTO perso (username, name, geburt, pkw, lkw, motorrad, waffe_klein, waffe_groß) VALUES (?, ?, ?, 'false', 'false', 'false', 'false', 'false')",
     [username, name, geburt],
     (err) => {
         if (err) {
-            return res.status(500).json({ "error": "500" })
+            console.log(`[Ausweis] Fehler: ${err}`)
+            return false
         } else { 
-            return res.status(200).json({ "success": true })
+            return "OK"
         }
         
     }
