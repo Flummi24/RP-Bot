@@ -108,3 +108,48 @@ for (const presence of data6.userPresences) {
         ohneAdmins.push(user.get(presence.userId));
     }
 }
+
+
+
+// Admins online auf Roblox
+
+
+for (const presence of data6.userPresences) {
+    if (
+        presence.userPresenceType === 2 &&
+        presence.placeId !== TARGET_PLACE_ID &&
+        presence.placeId
+    ) {
+        robloxAdmins.push(user.get(presence.userId));
+    }
+}
+
+for (const presence of data1.userPresences) {
+    if (
+        presence.userPresenceType === 2 &&
+        presence.placeId !== TARGET_PLACE_ID &&
+        presence.placeId
+    ) {
+        robloxAdmins.push(ic_rechte_user.get(presence.userId));
+    }
+}
+
+// Unbekannt
+
+for (const presence of data6.userPresences) {
+    if (
+        presence.userPresenceType === 2 &&
+        !presence.placeId
+    ) {
+        unknownAdmins.push(user.get(presence.userId));
+    }
+}
+
+for (const presence of data1.userPresences) {
+    if (
+        presence.userPresenceType === 2 &&
+        !presence.placeId
+    ) {
+        unknownAdmins.push(ic_rechte_user.get(presence.userId));
+    }
+}
