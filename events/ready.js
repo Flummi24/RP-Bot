@@ -1,6 +1,7 @@
 const data = require("../data/data.json")
 const builder = require("../commands/builder.js")
 const deploy = require("../utils/deploy.js")
+const update = require("../features/online-list/main.js")
 
 module.exports = (client) => {
     client.once('clientReady', async () => {
@@ -15,6 +16,15 @@ client.user.setPresence({
     ],
     status: 'online'
   });
+
+  if (data.features["online-list"]) {
+    console.log("[Online Liste] Loading")
+  setInterval(async () => {
+    update()
+  }, 1 * 60 * 1000);
+    console.log("[Online Liste] Ready")
+
+}
 
 
 });

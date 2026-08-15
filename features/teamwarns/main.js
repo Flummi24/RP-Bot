@@ -13,7 +13,9 @@ db.run(`
 `);
 
 module.exports = async (client) => {
+    console.log("[Teamwarns] Loading")
     client.on('interactionCreate', async interaction => {
+        try {
         if (!interaction.isChatInputCommand()) return;
 
         if (interaction.commandName === 'teamwarn') {
@@ -144,5 +146,10 @@ module.exports = async (client) => {
 }
         }
 
+    } catch (err) {
+        console.log(`[Teamwarns] Error: ${err}`)
+    }
     });
+
+    console.log("[Teamwarns] Ready")
 }

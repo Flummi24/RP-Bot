@@ -29,6 +29,13 @@
             "group-id": 123456789,
             "admin-role": 255,
             "no_right_role": 254
+        },
+        "teamwarns": {
+            "enabled": false,
+            "idk": 1
+        },
+        "utils": {
+            "enabled": false
         }
     },
     "logging": {

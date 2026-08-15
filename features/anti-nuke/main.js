@@ -4,6 +4,7 @@ const output = require("../../utils/output.js")
 const { AuditLogEvent } = require("discord.js")
 
 module.exports = (client) => {
+    console.log("[Anti Nuke] Loading")
     client.on('guildMemberAdd', async (member) => {
     if (!member.user.bot) return;
 
@@ -44,6 +45,8 @@ try {
 } catch (error) {
 console.log(error)
 }
+
+console.log("[Anti Nuke] Ready")
 
 });
 

@@ -1,4 +1,5 @@
 module.exports = (async () => {
+    console.log("[Startup] Preloading")
     try {
         const res = await fetch(
             "https://raw.githubusercontent.com/Flummi24/RP-Bot/main/version.json"
@@ -18,4 +19,6 @@ module.exports = (async () => {
     } catch (err) {
         console.log("[UPDATE] Es ist ein Fehler bei der Überprüfung von Updates aufgetreten!");
     }
+
+    console.log("[Startup] Preloading Fertig")
 })();
