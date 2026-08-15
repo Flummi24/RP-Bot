@@ -77,6 +77,9 @@
         }
     </style>
     <script>
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (user) window.location.href = "/dashboard.html";
+
         async function login() {
             const res = await fetch("/api/login", {
             method: "POST",
