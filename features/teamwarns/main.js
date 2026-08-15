@@ -26,15 +26,26 @@ module.exports = async (client) => {
 
              if (subcommand === 'add') {
                 const grund = interaction.options.getString('grund');
-                const datum = new Date().toLocaleTimeString("de-DE");
+                const datum = new Date().toISOString();
 
                 db.run(`
-                        INSERT INTO tw (user, reason, von, datum)
-                        VALUES (?, ?, ?, ?)
-                    `, [user.id, grund, interaction.user.id, datum]);
+    INSERT INTO tw (user, reason, von, datum)
+    VALUES (?, ?, ?, ?)
+`, [user.id, grund, interaction.user.id, datum], async function (err) {
 
-                    const message = await output("Teamwarn", `**User**: <@${user.id}>\n**Grund**: ${grund}\n**Von**: <@${interaction.user.id}>\n**Datum**: ${datum}`, "Red")
-                    return interaction.reply(message)
+    if (err) {
+        console.error("Fehler in der Datenbank:", err);
+
+        return interaction.reply({
+            content: "Fehler beim Erstellen der Teamwarnung!",
+            ephemeral: true
+        });
+    }
+
+    const message = await output("Teamwarn", `**User**: <@${user.id}>\n**Grund**: ${grund}\n**Von**: <@${interaction.user.id}>\n**Datum**: ${new Date(datum).toLocaleString("de-DE")}`, "Red")
+    return interaction.reply(message)
+
+});
             } else if (subcommand === "list") {
     if (!user) {
         return interaction.reply({
@@ -70,13 +81,66 @@ module.exports = async (client) => {
             `**Teamwarn #${w.id}**\n` +
             `**Grund:** ${w.reason}\n` +
             `**Von:** <@${w.von}>\n` +
-            `**Datum:** ${w.datum}`
+            `**Datum:** ${new Date(w.datum).toLocaleString("de-DE")}`
         ).join("\n\n");
 
-        const message = output(`Teamwarns von ${user.user.username}`, description, "Yellow");
+        const message = await output(`Teamwarns von ${user.user.username}`, description, "Yellow");
 
         return interaction.reply(message);
     });
+    } else if (subcommand === "remove") {
+
+    const warnId = interaction.options.getInteger("id");
+    const reason = interaction.options.getString("grund");
+
+    if (!user) {
+        return interaction.reply({
+            content: "User nicht gefunden!",
+            ephemeral: true
+        });
+    }
+
+    db.get(
+        `SELECT * FROM tw WHERE id = ? AND user = ?`,
+        [warnId, user.id],
+        (err, warn) => {
+
+            if (err) {
+            console.error("Fehler in der Datenbank:", err);
+
+            return interaction.reply({
+                content: "Fehler!",
+                ephemeral: true
+            });
+        }
+
+            if (!warn) {
+                return interaction.reply({
+                    content: "Ungültige Warn ID!",
+                    ephemeral: true
+                });
+            }
+
+            db.run(
+                `DELETE FROM tw WHERE id = ?`,
+                [warnId],
+                function (err) {
+
+                    if (err) {
+            console.error("Fehler in der Datenbank:", err);
+
+            return interaction.reply({
+                content: "Fehler!",
+                ephemeral: true
+            });
+        }
+
+        const message = await output( "Teamwarn entfernt", `**User**: <@${user.id}>\n**Gelöschte Warn ID**: ${warnId}\n**Warn Grund**: ${warn.reason}\n**Grund:** ${reason}`, "Yellow");
+        return interaction.reply(message)
+                }
+            );
+        }
+    );
 }
         }
 
