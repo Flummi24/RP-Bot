@@ -16,7 +16,7 @@ async function reset() {
                     )
                 `);
 
-    db.run(`
+    await db.run(`
     CREATE TABLE IF NOT EXISTS tw (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         user TEXT,
@@ -25,6 +25,21 @@ async function reset() {
         datum TEXT
     )
 `);
+
+await db.run(`
+    CREATE TABLE IF NOT EXISTS perso (
+        username TEXT NOT NULL UNIQUE,
+        name TEXT,
+        geburt TEXT,
+        pkw TEXT,
+        lkw TEXT,
+        motorrad TEXT,
+        waffe_klein TEXT,
+        waffe_groß TEXT
+    )
+`);
+
+
 
   // Standart Admin User Erstellen
   const token = crypto.randomBytes(128).toString("hex");
