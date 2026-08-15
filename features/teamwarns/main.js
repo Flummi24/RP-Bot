@@ -4,6 +4,7 @@ const output = require("../../utils/output.js")
 
 db.run(`
     CREATE TABLE IF NOT EXISTS tw (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         user TEXT,
         reason TEXT,
         von TEXT,
@@ -34,7 +35,49 @@ module.exports = async (client) => {
 
                     const message = await output("Teamwarn", `**User**: <@${user.id}>\n**Grund**: ${grund}\n**Von**: <@${interaction.user.id}>\n**Datum**: ${datum}`, "Red")
                     return interaction.reply(message)
-            }
+            } else if (subcommand === "list") {
+    if (!user) {
+        return interaction.reply({
+            content: "User nicht gefunden!",
+            ephemeral: true
+        });
+    }
+
+    db.all(`
+        SELECT id, reason, von, datum
+        FROM tw
+        WHERE user = ?
+        ORDER BY id DESC
+    `, [user.id], async (err, warns) => {
+
+        if (err) {
+            console.error("Fehler in der Datenbank:", err);
+
+            return interaction.reply({
+                content: "Fehler!",
+                ephemeral: true
+            });
+        }
+
+        if (!warns || warns.length === 0) {
+            return interaction.reply({
+                content: "Dieser User hat keine Teamwarns",
+                ephemeral: true
+            });
+        }
+
+        const description = warns.map(w =>
+            `**Teamwarn #${w.id}**\n` +
+            `**Grund:** ${w.reason}\n` +
+            `**Von:** <@${w.von}>\n` +
+            `**Datum:** ${w.datum}`
+        ).join("\n\n");
+
+        const message = output(`Teamwarns von ${user.user.username}`, description, "Yellow");
+
+        return interaction.reply(message);
+    });
+}
         }
 
     });
