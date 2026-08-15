@@ -3,6 +3,7 @@ const fs = require("fs/promises");
 const crypto = require("crypto")
 
 async function reset() {
+    try {
     // Alte DB Löschen
     await fs.unlink("../data/data.db");
 
@@ -37,7 +38,12 @@ async function reset() {
     }
 );
 
-                
+} catch (err) {
+    console.log(`[RESET] Fehler: ${err}`)
+    return false
+}
+
+return true      
 }
 
 module.exports = reset
