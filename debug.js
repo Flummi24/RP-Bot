@@ -2,8 +2,6 @@ const db = require("./utils/database.js")
 
 const crypto = require("crypto");
 
-const token = crypto.randomBytes(32).toString("hex");
-
 /*
 
 db.run(`CREATE TABLE IF NOT EXISTS users (
@@ -14,6 +12,8 @@ db.run(`CREATE TABLE IF NOT EXISTS users (
                 `)
 
 */
+
+const token = crypto.randomBytes(64).toString("hex");
 
 db.run(
     "INSERT INTO users (username, password, token) VALUES (?, ?, ?)",

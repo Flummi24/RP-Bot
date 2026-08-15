@@ -1,4 +1,4 @@
-require("../../../utils/database.js")
+const db = require("../../../utils/database.js")
 
 module.exports = async (api) => {
     api.post("/api/login", async (req, res) => {

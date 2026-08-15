@@ -18,7 +18,12 @@ db.run(`
             `);
 
 
-require("./routes/login.js")
+const login = require("./routes/login.js")
+login(api)
+
+const user = require("./routes/user.js")
+user(api)
+
 
 
 const server = api.listen(data["http-server"].port, () => {
