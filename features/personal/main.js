@@ -21,7 +21,7 @@ module.exports = async (client) => {
                 }
                 
                 if (subcommand === 'create') {
-                    const check1 = await check()
+                    const check1 = await check(interaction.member)
                      if (check1) {
                         return interaction.reply(check1)
                     }
@@ -52,7 +52,7 @@ module.exports = async (client) => {
 
                 if (subcommand === 'remove') {
                     const username = interaction.options.getString('username').toLowerCase();
-                    const check1 = await check()
+                    const check1 = await check(interaction.member)
                      if (check1) {
                         return interaction.reply(check1)
                     }
@@ -65,6 +65,28 @@ module.exports = async (client) => {
                     const ok = await remove(username)
                     if (!ok) {
                         return interaction.reply("Fehler beim Löschen vom Personalausweis")
+                    } else {
+                        return interaction.reply("OK")
+                    }
+                }
+
+                if (subcommand === 'edit') {
+                    const username = interaction.options.getString("username").toLowerCase()
+                    const feld = interaction.options.getString("feld")
+                    const wert = interaction.options.getString("wert")
+                    const check1 = await check(interaction.member)
+                     if (check1) {
+                        return interaction.reply(check1)
+                    }
+
+                    const hat_perso = await hat(username)
+                    if (!hat_perso) {
+                        return interaction.reply("Dieser User hat kein Personalausweis")
+                    }
+
+                    const sucess = edit(username, feld, wert)
+                    if (!sucess) {
+                        return interaction.reply("Fehler beim Bearbeiten vom Personalausweis")
                     } else {
                         return interaction.reply("OK")
                     }

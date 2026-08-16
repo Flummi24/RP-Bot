@@ -193,7 +193,7 @@ function edit_func(username, key, value) {
                 if (err) {
                     console.log(`[Ausweis] Fehler: ${err}`);
                     resolve(false);
-                    return;
+                    return false;
                 }
 
                 resolve(this.changes > 0);

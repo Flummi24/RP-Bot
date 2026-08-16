@@ -36,6 +36,9 @@
         },
         "utils": {
             "enabled": false
+        },
+        "personal": {
+            "enabled": false
         }
     },
     "logging": {

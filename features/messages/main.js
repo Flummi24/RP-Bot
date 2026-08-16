@@ -11,7 +11,7 @@ module.exports = async (client) => {
 
        if (interaction.commandName === 'say') {
         const message = interaction.options.getString("message")
-        const check1 = await check()
+        const check1 = await check(interaction.member)
         if (check1) {
             return interaction.reply(check1)
         }
@@ -21,7 +21,7 @@ module.exports = async (client) => {
        } // Say handler Ende
 
        if (interaction.commandName === 'embed') {
-        const check1 = await check()
+        const check1 = await check(interaction.member)
         if (check1) {
             return interaction.reply(check1)
         }
@@ -48,7 +48,7 @@ module.exports = async (client) => {
        } // Embed Handler Ende
 
     if (interaction.commandName === 'container') {
-        const check1 = await check()
+        const check1 = await check(interaction.member)
         if (check1) {
             return interaction.reply(check1)
         }
