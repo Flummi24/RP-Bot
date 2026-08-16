@@ -167,9 +167,30 @@ async function remove(username) {
   return ok
 }
 
-async function edit(username, key, value) {
-    
+function edit_func(username, key, value) {
+    return new Promise((resolve) => {
+        db.run(
+            `UPDATE perso SET "${key}" = ? WHERE username = ?`,
+            [value, username],
+            function (err) {
+                if (err) {
+                    console.log(`[Ausweis] Fehler: ${err}`);
+                    resolve(false);
+                    return;
+                }
+
+                resolve(this.changes > 0);
+            }
+        );
+    });
 }
+
+async function edit(username, key, value) {
+    const ok = await edit_func(username, key, value);
+
+    return ok;
+}
+
 
 module.exports = {
   'generate': generate,
