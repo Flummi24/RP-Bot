@@ -1,40 +1,48 @@
-const fs = require("fs/promises")
-const restore = require("./data.json")
-const reset = require("./reset-db.js")
+const fs = require("fs/promises");
+const path = require("path");
+
+const restore = require(path.join(__dirname, "./data.json"));
+const reset = require(path.join(__dirname, "./reset-db.js"));
 
 module.exports = (async () => {
-    console.log("[Startup] Preloading")
-   try {
-    try {
-        const stat = await fs.stat("../data");
+    console.log("[Startup] Preloading");
 
-        if (!stat.isDirectory()) {
-            throw new Error("/data ist kein Ordner");
+    const dataDir = path.join(__dirname, "../data");
+    const envFile = path.join(dataDir, ".env");
+    const dataFile = path.join(dataDir, "data.json");
+    const versionFile = path.join(__dirname, "../version.json");
+
+    try {
+        try {
+            const stat = await fs.stat(dataDir);
+
+            if (!stat.isDirectory()) {
+                throw new Error("/data ist kein Ordner");
+            }
+        } catch (err) {
+            if (err.code === "ENOENT") {
+                console.log("[Preload] Creating /data");
+
+                await fs.mkdir(dataDir, { recursive: true });
+
+                await fs.writeFile(
+                    envFile,
+                    "TOKEN=MTX\nCLIENT_ID=123456789"
+                );
+
+                await fs.writeFile(
+                    dataFile,
+                    JSON.stringify(restore, null, 4)
+                );
+
+                await reset();
+            } else {
+                throw err;
+            }
         }
     } catch (err) {
-        if (err.code === "ENOENT") {
-            console.log("[Preload] Creating /data");
-
-            await fs.mkdir("../data", { recursive: true });
-
-            await fs.writeFile(
-                "../data/.env",
-                "TOKEN=MTX\nCLIENT_ID=123456789"
-            );
-
-            await fs.writeFile(
-                "../data/data.json",
-                JSON.stringify(restore, null, 4)
-            );
-
-            await reset()
-        } else {
-            throw err;
-        }
+        console.log(`[Startup] Fehler: ${err}`);
     }
-} catch (err) {
-    console.log(`[Startup] Fehler: ${err}`);
-}
 
     try {
         const res = await fetch(
@@ -42,7 +50,7 @@ module.exports = (async () => {
         );
 
         const data = await res.json();
-        const local = require("../version.json");
+        const local = require(versionFile);
 
         if (Number(local.value) < Number(data.value)) {
             console.log("=====================================================================");
@@ -54,7 +62,8 @@ module.exports = (async () => {
         }
     } catch (err) {
         console.log("[UPDATE] Es ist ein Fehler bei der Überprüfung von Updates aufgetreten!");
+        console.log(err);
     }
 
-    console.log("[Startup] Preloading Fertig")
+    console.log("[Startup] Preloading Fertig");
 })();
