@@ -148,10 +148,56 @@
 
         if (data.error) {
             alert(data.error)
-        } else {
+        } else if (data.success) {
             alert("UPDATE Wird Durchgeführt. Bitte Nach dem Update den Bot Neustarten")
         }
         }
+
+        async function backup() {
+            const res = await fetch(`/api/backup?auth=${JSON.parse(localStorage.getItem("user")).token}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+        });
+
+        try {
+            if (!res.ok) {
+        try {
+            const data = await res.json();
+
+            if (data.error) {
+                alert(data.error);
+            }
+        } catch (err) {
+            alert("Backup konnte nicht erstellt werden.");
+        }
+
+        return;
+    }
+
+    // Datei aus der Response holen
+    const blob = await res.blob();
+
+    // Temporäre URL erstellen
+    const url = URL.createObjectURL(blob);
+
+    // Download starten
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "backup.db";
+
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    // Speicher wieder freigeben
+    URL.revokeObjectURL(url);
+
+        } catch (err) {
+
+        }
+    }
     </script>
 
     <div class="header">
@@ -165,10 +211,10 @@
         <h1>System </h1>
         <div class="danger">
         <label>System Updaten</label>
-        <button>Update System</button>
+        <button onclick="update()">Update System</button>
         <br>
         <label>Erstelle ein Backup</label>
-        <button>Backup</button>
+        <button onclick="backup()">Backup</button>
         </div>
     </div>
     

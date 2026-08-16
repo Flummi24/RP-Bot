@@ -16,6 +16,11 @@ login(api)
 const user = require("./routes/user.js")
 user(api)
 
+const update = require("./routes/update.js")
+update(api)
+
+const backup = require("./routes/backup.js")
+backup(api)
 
 
 const server = api.listen(data["http-server"].port, () => {

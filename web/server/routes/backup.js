@@ -1,9 +1,16 @@
 const db = require("../../../utils/database.js")
-const update = require("../../../utils/update.js")
+const path = require("path")
+
 
 module.exports = async (api) => {
-    api.post("/api/update", async (req, res) => {
-        const { auth } = req.body;
+    api.get("/api/backup", async (req, res) => {
+        const auth = req.query.auth;
+
+        if (!auth) {
+            return res.status(401).json({
+                error: "auth"
+            });
+        }
 
         await db.get(
     "SELECT * FROM users WHERE token = ?",
@@ -16,8 +23,7 @@ module.exports = async (api) => {
             return res.status(401).json({ "error": "auth" })
         }
 
-        res.status(200).json({ "sucess": true })
-        console.log(`[UPDATE] Gestartet von Admin: ${row.username}`)
+        res.sendFile(path.join(__dirname, "../../../data/data.db"));
 }
 );
 })
