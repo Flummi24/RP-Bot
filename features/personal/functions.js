@@ -112,25 +112,59 @@ return false
 
 } // generate Handler ende
 
-async function create(username, name, geburt) {
-  db.run(
-    "INSERT INTO perso (username, name, geburt, pkw, lkw, motorrad, waffe_klein, waffe_groß) VALUES (?, ?, ?, 'false', 'false', 'false', 'false', 'false')",
-    [username, name, geburt],
-    (err) => {
-        if (err) {
-            console.log(`[Ausweis] Fehler: ${err}`)
-            return false
-        } else { 
-            return "OK"
-        }
-        
-    }
-);
-    
+function add(username, name, geburt) {
+    return new Promise((resolve) => {
+        db.run(
+            `INSERT INTO perso 
+            (username, name, geburt, pkw, lkw, motorrad, waffe_klein, waffe_groß) 
+            VALUES (?, ?, ?, 'false', 'false', 'false', 'false', 'false')`,
+            [username, name, geburt],
+            function (err) {
+                if (err) {
+                    console.log(`[Ausweis] Fehler: ${err}`);
+                    resolve(false);
+                    return;
+                }
+
+                resolve(true);
+            }
+        );
+    });
 }
 
+
+async function create(username, name, geburt) {
+
+  const ok = await add(username, name, geburt)
+
+  return ok
+
+}
+
+function remove_func(username) {
+    return new Promise((resolve) => {
+        db.run(
+            "DELETE FROM perso WHERE username = ? LIMIT 1",
+            [username],
+            function (err) {
+                if (err) {
+                    console.log(`[Ausweis] Fehler: ${err}`);
+                    resolve(false);
+                    return;
+                }
+
+                resolve(this.changes > 0);
+            }
+        );
+    });
+}
+
+
 async function remove(username) {
-    
+
+  const ok = await remove_func(username)
+
+  return ok
 }
 
 async function edit(username, key, value) {
