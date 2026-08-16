@@ -1,6 +1,24 @@
 const db = require("../../utils/database.js")
 const { createCanvas, loadImage } = require("canvas");
+const { info } = require("console");
 const crypto = require("crypto")
+
+function hat(username) {
+    return new Promise((resolve, reject) => {
+        db.get(
+            "SELECT username FROM perso WHERE username = ?",
+            [username],
+            (err, row) => {
+                if (err) {
+                    return reject(err);
+                }
+
+                resolve(!!row);
+            }
+        );
+    });
+}
+
 
 function infos(username) {
     return new Promise((resolve, reject) => {
@@ -135,10 +153,9 @@ function add(username, name, geburt) {
 
 async function create(username, name, geburt) {
 
-  const ok = await add(username, name, geburt)
+  const ok = await add(username.toLowerCase(), name, geburt)
 
   return ok
-
 }
 
 function remove_func(username) {
@@ -196,5 +213,7 @@ module.exports = {
   'generate': generate,
   'create': create,
   'remove': remove,
-  'edit': edit
+  'edit': edit,
+  'info': info,
+  'hat': hat
 }

@@ -1,4 +1,4 @@
-const { generate, create } = require("./functions.js")
+const { generate, create, remove, edit, hat } = require("./functions.js")
 const check = require("../../utils/permissions.js")
 const roblox = require("../../utils/rblx.js")
 const output = require("../../utils/output.js")
@@ -11,7 +11,7 @@ module.exports = async (client) => {
                 const subcommand = interaction.options.getSubcommand();
 
                 if (subcommand === 'get') {
-                    const username = interaction.options.getString('username')
+                    const username = interaction.options.getString('username').toLowerCase();
                     const data = await generate(username)
                     if (data) {
                         return interaction.reply(data)
@@ -26,9 +26,15 @@ module.exports = async (client) => {
                         return interaction.reply(check1)
                     }
 
-                    const username = interaction.options.getString('username')
+                    const username = interaction.options.getString('username').toLowerCase();
                     const name = interaction.options.getString('name')
                     const geburt = interaction.options.getString('geburt')
+
+                    const hat_perso = await hat(username);
+
+                    if (hat_perso) {
+                        return interaction.reply("Dieser User hat bereits einen Personalausweis");
+                    }
                     
                     const ok = await roblox(username)
                     if (!ok) {
@@ -42,6 +48,26 @@ module.exports = async (client) => {
 
                     return interaction.reply(output("Personalausweis Erstellt", `**Username**: ${username}\n**Name**: ${name}\n**Geburtsdatum**: ${geburt}`, 'Green'))
                     
+                }
+
+                if (subcommand === 'remove') {
+                    const username = interaction.options.getString('username').toLowerCase();
+                    const check1 = await check()
+                     if (check1) {
+                        return interaction.reply(check1)
+                    }
+
+                    const hat_perso = await hat(username)
+                    if (!hat_perso) {
+                        return interaction.reply("Dieser User hat kein Personalausweis")
+                    }
+
+                    const ok = await remove(username)
+                    if (!ok) {
+                        return interaction.reply("Fehler beim Löschen vom Personalausweis")
+                    } else {
+                        return interaction.reply("OK")
+                    }
                 }
             }
 
