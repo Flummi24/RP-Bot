@@ -28,3 +28,13 @@ config(api)
 const server = api.listen(data["http-server"].port, () => {
     console.log("[Web Server] Ready")
 });
+
+server.on("error", (err) => {
+    console.error("[Web Server] Error:", err);
+
+    if (err.code === "EADDRINUSE") {
+        console.error(
+            `[Web Server] Port ${data["http-server"].port} ist bereits belegt.`
+        );
+    }
+});
