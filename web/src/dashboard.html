@@ -46,6 +46,12 @@
             user-select: none;
             cursor: pointer;
         }
+
+        .active {
+            background-color: #1d1f21;
+    border: 1px solid #414346;
+    border-radius: 7px;
+        }
     </style>
 </head>
 <body>
@@ -69,7 +75,7 @@
     </script>
 
     <div class="header">
-        <label>Home</label>
+        <label class="active">Home</label>
         <label onclick="online()">Online</label>
         <label onclick="settings()">Einstellungen</label>
         <label onclick="settings()">System</label>
