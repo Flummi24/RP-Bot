@@ -5,7 +5,11 @@ const crypto = require("crypto")
 async function reset() {
     try {
     // Alte DB Löschen
+    try {
     await fs.unlink("../data/data.db");
+    } catch (err) {
+       
+    }
 
     // Neue Tabellen Erstellen
     await db.run(`
