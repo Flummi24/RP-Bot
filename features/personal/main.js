@@ -1,5 +1,7 @@
-const { generate } = require("./functions.js")
+const { generate, create } = require("./functions.js")
 const check = require("../../utils/permissions.js")
+const roblox = require("../../utils/rblx.js")
+const output = require("../../utils/output.js")
 
 module.exports = async (client) => {
     client.on('interactionCreate', async interaction => {
@@ -23,6 +25,23 @@ module.exports = async (client) => {
                      if (check1) {
                         return interaction.reply(check1)
                     }
+
+                    const username = interaction.options.getString('username')
+                    const name = interaction.options.getString('name')
+                    const geburt = interaction.options.getString('geburt')
+                    
+                    const ok = await roblox(username)
+                    if (!ok) {
+                        return interaction.reply("Roblox Username nicht gefunden!")
+                    }
+
+                    const sucess = await create(username, name, geburt)
+                    if(!sucess) {
+                        return interaction.reply("Fehler bei der Erstellung vom Personalasuweis!")
+                    }
+
+                    return interaction.reply(output("Personalausweis Erstellt", `**Username**: ${username}\n**Name**: ${name}\n**Geburtsdatum**: ${geburt}`, 'Green'))
+                    
                 }
             }
 

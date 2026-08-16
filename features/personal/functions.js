@@ -28,11 +28,12 @@ const row = await infos(username);
 
   const name = row.name
   const geburt = row.geburt
-  const pkw = row.pkw
-  const lkw = row.lkw
-  const motorrad = row.motorrad
-  const waffe_klein = row.waffe_klein
-  const waffe_groß = row.waffe_groß
+  const pkw = row.pkw === "true";
+  const lkw = row.lkw === "true";
+  const motorrad = row.motorrad === "true";
+  const waffe_klein = row.waffe_klein === "true";
+  const waffe_groß = row.waffe_groß === "true";
+
 
   const scheine = [];
   if (pkw) scheine.push("PKW");
