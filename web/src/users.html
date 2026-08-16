@@ -1,0 +1,684 @@
+<script>
+    // Bin Schlecht in Html, deshalb ist users.html mit chatgpt gemacht
+</script>
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+
+    <style>
+        * {
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #101214;
+            color: white;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        .header {
+            background-color: #1d1f21;
+            border: 1px solid #414346;
+            border-radius: 7px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .header label {
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 8px 12px;
+        }
+
+        .header label:hover {
+            opacity: 0.7;
+        }
+
+        .active {
+            background-color: white;
+            border-radius: 9px;
+            color: black !important;
+        }
+
+        .container {
+            background-color: #1d1f21;
+            border: 1px solid #414346;
+            border-radius: 7px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+            width: 80%;
+            max-width: 1000px;
+
+            margin: 50px auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .reload-button,
+        .add-button,
+        .cancel-button,
+        .delete-button {
+            color: white;
+            border: none;
+            border-radius: 7px;
+            padding: 10px 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .reload-button {
+            background-color: #444;
+        }
+
+        .reload-button:hover {
+            background-color: #555;
+        }
+
+        .add-button {
+            background-color: #168a35;
+        }
+
+        .add-button:hover {
+            background-color: #1eaa43;
+        }
+
+        .cancel-button {
+            background-color: #444;
+        }
+
+        .cancel-button:hover {
+            background-color: #555;
+        }
+
+        .delete-button {
+            background-color: #e00000;
+            padding: 8px 14px;
+        }
+
+        .delete-button:hover {
+            background-color: #ff2222;
+        }
+
+        .add-user-box {
+            background-color: #181a1c;
+            border: 1px solid #414346;
+            border-radius: 7px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .add-user-box h2 {
+            margin-top: 0;
+        }
+
+        .add-user-box input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+
+            background-color: #101214;
+            border: 1px solid #414346;
+            border-radius: 7px;
+
+            color: white;
+            outline: none;
+        }
+
+        .add-user-box input:focus {
+            border-color: white;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+
+        th,
+        td {
+            border: 1px solid #414346;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #292c2f;
+        }
+
+        tr:nth-child(even) {
+            background-color: #181a1c;
+        }
+
+        tr:hover {
+            background-color: #25282b;
+        }
+
+        .empty {
+            text-align: center;
+            color: #aaa;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<script>
+    const currentUser = JSON.parse(localStorage.getItem("user"));
+
+    if (!currentUser) {
+        window.location.href = "/login.html";
+    }
+</script>
+
+
+<div class="header">
+    <label onclick="home()">Home</label>
+    <label class="active">Users</label>
+    <label onclick="settings()">Einstellungen</label>
+    <label onclick="system()">System</label>
+</div>
+
+
+<div class="container">
+
+    <h1>Users</h1>
+
+    <div class="actions">
+
+        <button class="reload-button" onclick="loadUsers()">
+            Aktualisieren
+        </button>
+
+        <button class="add-button" onclick="showAddUser()">
+            User hinzufügen
+        </button>
+
+    </div>
+
+
+    <!-- User hinzufügen -->
+
+    <div id="addUserBox" class="add-user-box" style="display: none;">
+
+        <h2>User hinzufügen</h2>
+
+        <input
+            type="text"
+            id="newUsername"
+            placeholder="Username"
+        >
+
+        <input
+            type="password"
+            id="newPassword"
+            placeholder="Passwort"
+        >
+
+        <div class="form-buttons">
+
+            <button class="add-button" onclick="addUser()">
+                Hinzufügen
+            </button>
+
+            <button class="cancel-button" onclick="hideAddUser()">
+                Abbrechen
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- User Tabelle -->
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Aktion</th>
+            </tr>
+        </thead>
+
+        <tbody id="userTable">
+
+            <tr>
+                <td colspan="2" class="empty">
+                    User werden geladen...
+                </td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+<script>
+
+    /*
+     * Auth Token holen
+     */
+
+    function getAuth() {
+
+        const user = JSON.parse(localStorage.getItem("user"));
+
+        if (!user || !user.token) {
+
+            window.location.href = "/login.html";
+
+            return null;
+        }
+
+        return user.token;
+    }
+
+
+    /*
+     * User laden
+     */
+
+    async function loadUsers() {
+
+        const auth = getAuth();
+
+        if (!auth) return;
+
+
+        try {
+
+            const res = await fetch(
+                `/api/user/get?auth=${encodeURIComponent(auth)}`
+            );
+
+
+            const data = await res.json();
+
+
+            if (!res.ok) {
+
+                if (data.error === "auth") {
+                    alert("Keine Berechtigung.");
+                } else {
+                    alert(
+                        data.error ||
+                        "User konnten nicht geladen werden."
+                    );
+                }
+
+                return;
+            }
+
+
+            const table = document.getElementById("userTable");
+
+            table.innerHTML = "";
+
+
+            if (!data.res || data.res.length === 0) {
+
+                table.innerHTML = `
+                    <tr>
+                        <td colspan="2" class="empty">
+                            Keine User vorhanden.
+                        </td>
+                    </tr>
+                `;
+
+                return;
+            }
+
+
+            data.res.forEach(user => {
+
+                const row = document.createElement("tr");
+
+
+                /*
+                 * Username
+                 */
+
+                const usernameCell = document.createElement("td");
+
+                usernameCell.textContent = user.username;
+
+
+                /*
+                 * Aktion
+                 */
+
+                const actionCell = document.createElement("td");
+
+
+                const deleteButton =
+                    document.createElement("button");
+
+
+                deleteButton.textContent = "Löschen";
+
+                deleteButton.className = "delete-button";
+
+
+                deleteButton.onclick = () => {
+
+                    deleteUser(user.username);
+
+                };
+
+
+                actionCell.appendChild(deleteButton);
+
+
+                row.appendChild(usernameCell);
+
+                row.appendChild(actionCell);
+
+
+                table.appendChild(row);
+
+            });
+
+
+        } catch (err) {
+
+            console.error(err);
+
+            alert("Fehler beim Laden der User.");
+
+        }
+
+    }
+
+
+    /*
+     * User hinzufügen Fenster öffnen
+     */
+
+    function showAddUser() {
+
+        document.getElementById("addUserBox").style.display = "block";
+
+        document.getElementById("newUsername").focus();
+
+    }
+
+
+    /*
+     * User hinzufügen Fenster schließen
+     */
+
+    function hideAddUser() {
+
+        document.getElementById("addUserBox").style.display = "none";
+
+        document.getElementById("newUsername").value = "";
+
+        document.getElementById("newPassword").value = "";
+
+    }
+
+
+    /*
+     * User hinzufügen
+     */
+
+    async function addUser() {
+
+        const auth = getAuth();
+
+        if (!auth) return;
+
+
+        const username =
+            document.getElementById("newUsername").value.trim();
+
+
+        const password =
+            document.getElementById("newPassword").value;
+
+
+        if (!username) {
+
+            alert("Bitte einen Username eingeben.");
+
+            return;
+        }
+
+
+        if (!password) {
+
+            alert("Bitte ein Passwort eingeben.");
+
+            return;
+        }
+
+
+        try {
+
+            const res = await fetch("/api/user/add", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    username: username,
+
+                    password: password,
+
+                    auth: auth
+
+                })
+
+            });
+
+
+            const data = await res.json();
+
+
+            if (!res.ok) {
+
+                if (data.error === "auth") {
+
+                    alert("Keine Berechtigung.");
+
+                } else {
+
+                    alert(
+                        data.error ||
+                        "User konnte nicht erstellt werden."
+                    );
+
+                }
+
+                return;
+            }
+
+
+            if (data.success) {
+
+                alert(
+                    `User "${username}" wurde erstellt.`
+                );
+
+
+                hideAddUser();
+
+
+                // Tabelle aktualisieren
+
+                loadUsers();
+
+            }
+
+
+        } catch (err) {
+
+            console.error(err);
+
+            alert("Fehler beim Erstellen des Users.");
+
+        }
+
+    }
+
+
+    /*
+     * User löschen
+     */
+
+    async function deleteUser(username) {
+
+        const auth = getAuth();
+
+        if (!auth) return;
+
+
+        const confirmDelete = confirm(
+            `Möchtest du den User "${username}" wirklich löschen?`
+        );
+
+
+        if (!confirmDelete) {
+
+            return;
+
+        }
+
+
+        try {
+
+            const res = await fetch("/api/user/remove", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    username: username,
+
+                    auth: auth
+
+                })
+
+            });
+
+
+            const data = await res.json();
+
+
+            if (!res.ok) {
+
+                if (data.error === "auth") {
+
+                    alert("Keine Berechtigung.");
+
+                } else {
+
+                    alert(
+                        data.error ||
+                        "User konnte nicht gelöscht werden."
+                    );
+
+                }
+
+                return;
+            }
+
+
+            if (data.success) {
+
+                alert(
+                    `User "${username}" wurde gelöscht.`
+                );
+
+
+                // Tabelle aktualisieren
+
+                loadUsers();
+
+            }
+
+
+        } catch (err) {
+
+            console.error(err);
+
+            alert("Fehler beim Löschen des Users.");
+
+        }
+
+    }
+
+
+    /*
+     * Navigation
+     */
+
+    function home() {
+
+        window.location.href = "/dashboard.html";
+
+    }
+
+
+    function settings() {
+
+        window.location.href = "/settings.html";
+
+    }
+
+
+    function system() {
+
+        window.location.href = "/system.html";
+
+    }
+
+
+    /*
+     * User beim Laden der Seite abrufen
+     */
+
+    loadUsers();
+
+</script>
+
+</body>
+</html>

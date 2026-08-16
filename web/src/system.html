@@ -132,6 +132,9 @@
         async function home() {
             window.location.href = "/dashboard.html";
         }
+        async function users() {
+            window.location.href = "/users.html";
+        }
 
         async function update() {
             const res = await fetch("/api/update", {
@@ -202,6 +205,7 @@
 
     <div class="header">
         <label onclick="home()">Home</label>
+        <label onclick="users()">Users</label>
         <label onclick="settings()">Einstellungen</label>
         <label class="active">System</label>
     </div>

@@ -71,10 +71,14 @@
         async function system() {
             window.location.href = "/system.html";
         }
+        async function users() {
+            window.location.href = "/users.html";
+        }
     </script>
 
     <div class="header">
         <label class="active">Home</label>
+        <label onclick="users()">Users</label>
         <label onclick="settings()">Einstellungen</label>
         <label onclick="system()">System</label>
     </div>

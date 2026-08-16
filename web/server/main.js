@@ -22,6 +22,8 @@ update(api)
 const backup = require("./routes/backup.js")
 backup(api)
 
+const config = require("./routes/config.js")
+config(api)
 
 const server = api.listen(data["http-server"].port, () => {
     console.log("[Web Server] Ready")
