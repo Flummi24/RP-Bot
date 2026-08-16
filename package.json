@@ -5,6 +5,7 @@
     "discord.js": "^14.27.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "sqlite3": "^6.0.1"
+    "sqlite3": "^6.0.1",
+    "unzipper": "^0.12.5"
   }
 }
