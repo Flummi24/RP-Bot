@@ -103,11 +103,11 @@ const row = await infos(username);
 
     // Titel
     bild.fillStyle = '#111111';
-    bild.font = 'bold 55px Arial';
+    bild.font = 'bold 45px Arial';
     bild.fillText('Personalausweis', 18, 60);
 
     // Daten
-    bild.font = 'bold 24px Arial';
+    bild.font = 'bold 35px Arial';
 
     bild.fillText(`Name: ${name}`, 22, 145);
     bild.fillText(`Geburtsdatum: ${geburt}`, 22, 170);
