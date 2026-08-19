@@ -214,6 +214,6 @@ module.exports = {
   'create': create,
   'remove': remove,
   'edit': edit,
-  'info': info,
+  'info': infos,
   'hat': hat
 }
