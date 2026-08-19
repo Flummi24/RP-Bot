@@ -103,17 +103,17 @@ const row = await infos(username);
 
     // Titel
     bild.fillStyle = '#111111';
-    bild.font = 'bold 45px Arial';
+    bild.font = 'bold 55px Arial';
     bild.fillText('Personalausweis', 18, 60);
 
     // Daten
     bild.font = 'bold 24px Arial';
 
-    bild.fillText(`Name: ${name}`, 22, 125);
-    bild.fillText(`Geburtsdatum: ${geburt}`, 22, 150);
-    bild.fillText(`Führerscheine: ${scheine.join(", ") || "Keine"}`, 22, 220);
-    bild.fillText(`Großer Waffenschein: ${waffe_groß ? "Ja" : "Nein"}`, 22, 245);
-    bild.fillText(`Kleiner Waffenschein: ${waffe_klein ? "Ja" : "Nein"}`, 22, 270);
+    bild.fillText(`Name: ${name}`, 22, 145);
+    bild.fillText(`Geburtsdatum: ${geburt}`, 22, 170);
+    bild.fillText(`Führerscheine: ${scheine.join(", ") || "Keine"}`, 22, 240);
+    bild.fillText(`Großer Waffenschein: ${waffe_groß ? "Ja" : "Nein"}`, 22, 265);
+    bild.fillText(`Kleiner Waffenschein: ${waffe_klein ? "Ja" : "Nein"}`, 22, 290);
 
     const buffer = canvas.toBuffer('image/png');
 
