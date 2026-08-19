@@ -1,5 +1,6 @@
 const fs = require("fs/promises");
 const path = require("path");
+const process = require("process")
 
 const restore = require(path.join(__dirname, "./data.json"));
 const reset = require(path.join(__dirname, "./reset-db.js"));
@@ -43,6 +44,8 @@ async function preload(params) {
                 console.log("  Username: admin")
                 console.log("  Passwort: admin")
                 console.log("================================================")
+
+                process.exit(0)
             } else {
                 throw err;
             }
