@@ -23,6 +23,7 @@ client.user.setPresence({
     update()
   }, 1 * 60 * 1000);
     console.log("[Online Liste] Ready")
+    update()
 
 }
 
