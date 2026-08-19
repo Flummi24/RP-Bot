@@ -186,7 +186,7 @@ const real = text999
 .replace("{UNBEKANNT}", buildList(unknownAdmins))
 .replace("{TIMESTAMP}", `<t:${timestamp}:R>`);
 
-const split = text999.split("\n");
+const split = real.split("\n");
         
 const title = split.shift();
 const content = split.join("\n");
