@@ -25,6 +25,9 @@ backup(api)
 const config = require("./routes/config.js")
 config(api)
 
+const api_data = require("./routes/data.js")
+api_data(api)
+
 const server = api.listen(data["http-server"].port, () => {
     console.log(`[Web Server] Port: ${data["http-server"].port}`)
     console.log("[Web Server] Ready")
