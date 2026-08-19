@@ -22,10 +22,10 @@ const response = await fetch(
    }
 );
 
-const data = await response.json();
+const data89 = await response.json();
 
 const ic_rechte_user = new Map(
-    data.data.map(user => [
+    data89.data.map(user => [
         user.userId,
         user.username
     ])
