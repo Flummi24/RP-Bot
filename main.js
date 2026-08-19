@@ -1,4 +1,7 @@
-require("./utils/preload.js")
+const reload = require("./utils/preload.js")
+(async () => {
+    await preload()
+})
 require("dotenv").config({
     path: "../data/.env"
 });
@@ -9,7 +12,8 @@ const commands = require("./commands/builder.js")
 const deploy = require("./utils/deploy.js")
 deploy(commands)
 
-const data = require("./data/data.json")
+const data = require("./data/data.json");
+const preload = require("./utils/preload.js");
 
 if (data.features["anti-nuke"].enabled) {
 const anti_nuke = require("./features/anti-nuke/main.js")
