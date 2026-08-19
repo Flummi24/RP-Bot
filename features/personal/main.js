@@ -1,4 +1,4 @@
-const { generate, create, remove, edit, hat, getall } = require("./functions.js")
+const { generate, create, remove, edit, hat, getall, info } = require("./functions.js")
 const check = require("../../utils/permissions.js")
 const roblox = require("../../utils/rblx.js")
 const output = require("../../utils/output.js")
