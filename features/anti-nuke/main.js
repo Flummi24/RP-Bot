@@ -27,9 +27,9 @@ module.exports = (client) => {
         const message = output('Anti Nuke', `\n**User**: <@${inviter.id}>\n**Bot**: <@${member.id}>\n**Aktionen**: Ban`, Red)
 
         if (data.discord["use-container"]) {
-            channel.send({ flags: 1 << 15, components: [message] });
+            channel.send(message);
     } else {
-        channel.send({ embeds: [message] })
+        channel.send(message)
     }
 
     }

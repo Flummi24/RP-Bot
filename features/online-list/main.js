@@ -188,7 +188,10 @@ const real = text999
 
 const split = text999.split("\n");
         
-const message = output(split[0], real, "Green")
+const title = split.shift();
+const content = split.join("\n");
+
+const message = output(title, content, "Green");
 
 for (const id of JSON.parse(data.features["online-list"]["channels"])) {
     const channel = await client.channels.fetch(id)
