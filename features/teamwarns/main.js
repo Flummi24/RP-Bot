@@ -1,12 +1,17 @@
 const db = require("../../utils/database.js")
 const data = require("../../data/data.json")
 const output = require("../../utils/output.js")
+const check = require("../../utils/permissions.js")
 
 module.exports = async (client) => {
     console.log("[Teamwarns] Loading")
     client.on('interactionCreate', async interaction => {
         try {
         if (!interaction.isChatInputCommand()) return;
+        const ok = await check(interaction.member)
+        if (ok) {
+            return interaction.reply(ok)
+        }
 
         if (interaction.commandName === 'teamwarn') {
              const subcommand = interaction.options.getSubcommand();

@@ -109,7 +109,7 @@ const row = await infos(username);
     // Daten
     bild.font = 'bold 30px Arial';
 
-    bild.fillText(`Name: ${name}`, 22, 140);
+    bild.fillText(`Name: ${name}`, 22, 135);
     bild.fillText(`Geburtsdatum: ${geburt}`, 22, 170);
     bild.fillText(`Führerscheine: ${scheine.join(", ") || "Keine"}`, 22, 235);
     bild.fillText(`Großer Waffenschein: ${waffe_groß ? "Ja" : "Nein"}`, 22, 270);
