@@ -121,14 +121,12 @@ if (waffe_groß) waffenscheine.push("Groß");
     const avatarUrl = thumbData.data[0].imageUrl;
           
 
-    // Canvas starten
     const base = await loadImage(path.join(__dirname, "./background.png"));
     const canvas = createCanvas(base.width, base.height);
     const bild = canvas.getContext('2d');
 
     bild.drawImage(base, 0, 0);
 
-    // Avatar
     const avatar = await loadImage(avatarUrl);
 
     const avatarWidth = 240;
@@ -140,12 +138,10 @@ if (waffe_groß) waffenscheine.push("Groß");
 
     bild.drawImage(avatar, x, y, avatarWidth, avatarHeight);
 
-    // Titel
     bild.fillStyle = '#111111';
     bild.font = 'bold 45px Arial';
     bild.fillText('Personalausweis', 18, 60);
 
-    // Daten
     bild.font = 'bold 30px Arial';
 
     bild.fillText(`Name: ${name}`, 20, 125);
