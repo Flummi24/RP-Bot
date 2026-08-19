@@ -82,6 +82,10 @@ try {
     haeuser = [];
 }
 
+const hausText = haeuser.length
+    ? haeuser.join(", ")
+    : "Keine";
+
 const scheine = [];
 
 if (pkw) scheine.push("PKW");
@@ -149,6 +153,8 @@ if (waffe_groß) waffenscheine.push("Groß");
     bild.fillText(`Führerscheine: ${scheine.join(", ") || "Keine"}`, 22, 220);
     bild.fillText(`Großer Waffenschein: ${waffe_groß ? "Ja" : "Nein"}`, 22, 255);
     bild.fillText(`Kleiner Waffenschein: ${waffe_klein ? "Ja" : "Nein"}`, 22, 290);
+    bild.fillText(`Häuser: ${haeuser.join(", ") || "Keine"}`, 22, 315);
+
 
     const buffer = canvas.toBuffer('image/png');
 
