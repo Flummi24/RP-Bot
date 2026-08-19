@@ -195,10 +195,10 @@ for (const id of JSON.parse(data.features["online-list"]["channels"])) {
 
     if (data.discord["use-container"]) {
         await channel.bulkDelete(100);
-        await channel.send({ flags: 1 << 15, components: [message] });
+        await channel.send(message);
     } else {
         await channel.bulkDelete(100);
-        await channel.send({ embeds: [message] })
+        await channel.send(message)
     }
 }
 }
