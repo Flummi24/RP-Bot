@@ -109,11 +109,11 @@ const row = await infos(username);
     // Daten
     bild.font = 'bold 30px Arial';
 
-    bild.fillText(`Name: ${name}`, 22, 145);
+    bild.fillText(`Name: ${name}`, 22, 140);
     bild.fillText(`Geburtsdatum: ${geburt}`, 22, 170);
-    bild.fillText(`Führerscheine: ${scheine.join(", ") || "Keine"}`, 22, 240);
-    bild.fillText(`Großer Waffenschein: ${waffe_groß ? "Ja" : "Nein"}`, 22, 265);
-    bild.fillText(`Kleiner Waffenschein: ${waffe_klein ? "Ja" : "Nein"}`, 22, 290);
+    bild.fillText(`Führerscheine: ${scheine.join(", ") || "Keine"}`, 22, 235);
+    bild.fillText(`Großer Waffenschein: ${waffe_groß ? "Ja" : "Nein"}`, 22, 270);
+    bild.fillText(`Kleiner Waffenschein: ${waffe_klein ? "Ja" : "Nein"}`, 22, 305);
 
     const buffer = canvas.toBuffer('image/png');
 
