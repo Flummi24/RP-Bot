@@ -43,6 +43,11 @@ if (data.features.personal.enabled) {
     personal(client)
 }
 
+if (data.logging.enabled) {
+    const logging = require("./features/logging/main.js")
+    logging(client)
+}
+
 
 if (data["http-server"].enabled) {
     const web = require("./web/server/main.js")
