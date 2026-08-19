@@ -18,6 +18,8 @@ module.exports = async (api) => {
 
         res.status(200).json({ "sucess": true })
         console.log(`[UPDATE] Gestartet von Admin: ${row.username}`)
+
+        await update()
 }
 );
 })
