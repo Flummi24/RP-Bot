@@ -40,6 +40,7 @@ if (data.features["online-list"].enabled) {
 
 if (data.features.personal.enabled) {
     const personal = require("./features/personal/main.js")
+    personal(client)
 }
 
 
