@@ -62,13 +62,9 @@ for (const presence of data1.userPresences) {
         ingameAdmins.push(ic_rechte_user.get(presence.userId));
     }
 }
-} catch (err) {
-    console.log(`[ONLINE Liste] Fehler: ${err}`)
-}
 
 // Admins ohne ic Rechte
 
-try {
 
 const response5 = await fetch(
     `https://groups.roblox.com/v1/groups/${data.features["online-list"]["group-id"]}/roles/${data.features["online-list"]["no_right_role"]}/users?limit=100`,
@@ -118,11 +114,6 @@ for (const presence of data6.userPresences) {
         ohneAdmins.push(user.get(presence.userId));
     }
 }
-
-} catch (err) {
-    console.log(`[ONLINE Liste] Fehler: ${err}`)
-}
-
 // Admins online auf Roblox
 
 
@@ -208,6 +199,8 @@ for (const id of JSON.parse(data.features["online-list"]["channels"])) {
         await channel.send(message)
     }
 }
+} catch (err) {
+    console.log(`[ONLINE Liste] Fehler: ${err}`)
 }
-
+}
 module.exports = update;
