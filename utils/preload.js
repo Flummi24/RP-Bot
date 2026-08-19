@@ -39,7 +39,7 @@ module.exports = (async () => {
 
                 console.log("[Preload] Erfolgreich Data Ordner Erstellt")
                 console.log("\n================================================")
-                console.log("Web Panel:")
+                console.log(`Web Panel:`)
                 console.log("  Username: admin")
                 console.log(  "Passwort: admin")
                 console.log("================================================")

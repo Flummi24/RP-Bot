@@ -26,6 +26,7 @@ const config = require("./routes/config.js")
 config(api)
 
 const server = api.listen(data["http-server"].port, () => {
+    console.log(`[Web Server] Port: ${data["http-server"].port}`)
     console.log("[Web Server] Ready")
 });
 

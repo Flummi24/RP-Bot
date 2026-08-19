@@ -190,7 +190,8 @@ for (const id of data.features["online-list"]["channels"]) {
     const channel = await client.channels.fetch(id)
 
     if (data.discord["use-container"]) {
-            channel.send({ flags: 1 << 15, components: [message] });
+        await channel.bulkDelete(100);
+        await channel.send({ flags: 1 << 15, components: [message] });
     } else {
         channel.send({ embeds: [message] })
     }
