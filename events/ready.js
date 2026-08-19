@@ -17,7 +17,7 @@ client.user.setPresence({
     status: 'online'
   });
 
-  if (data.features["online-list"]) {
+  if (data.features["online-list"].enabled) {
     console.log("[Online Liste] Loading")
   setInterval(async () => {
     update()

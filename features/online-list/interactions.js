@@ -35,7 +35,7 @@ async function userToId(username) {
 }
 
 module.exports = async (client) => {
-    console.log("[Teamwarns] Loading");
+    console.log("[ONLINE Liste] Loading");
 
     client.on("interactionCreate", async interaction => {
         try {
@@ -80,10 +80,7 @@ module.exports = async (client) => {
                 presence.userPresenceType === 2 &&
                 presence.placeId === 7711635737
             ) {
-                // Wert im geladenen JSON-Objekt ändern
                 data.features["online-list"]["game-id"] = presence.gameId;
-
-                // JSON-Datei dauerhaft speichern
                 await fs.writeFile(
                     dataPath,
                     JSON.stringify(data, null, 4),

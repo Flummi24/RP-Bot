@@ -27,7 +27,7 @@ utils(client)
 }
 
 if (data.features["online-list"].enabled) {
-    const online = require("./features/online-list/main.js")
+    const online = require("./features/online-list/interactions.js")
     online(client)
 }
 
