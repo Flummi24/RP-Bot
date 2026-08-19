@@ -19,12 +19,11 @@ client.user.setPresence({
 
   if (data.features["online-list"].enabled) {
     console.log("[Online Liste] Loading")
+    update(client)
   setInterval(async () => {
-    update()
+    update(client)
   }, 1 * 60 * 1000);
     console.log("[Online Liste] Ready")
-    update()
-
 }
 
 
