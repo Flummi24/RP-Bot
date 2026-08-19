@@ -2,6 +2,7 @@ const data = require("../../data/data.json")
 const { EmbedBuilder } = require("discord.js")
 
 module.exports = (client) => {
+    console.log("[Logging] Loading")
 client.on("messageDelete", async (message) => {
     if (message.author.bot) return;
 
@@ -72,4 +73,5 @@ ${attachmentText}
 
 });
 
+console.log("[Logging] Ready")
 }

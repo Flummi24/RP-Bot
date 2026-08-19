@@ -14,6 +14,7 @@ try {
   Routes.applicationCommands(CLIENT_ID),
   { body: commands }
 )
+console.log("[Commands] Erfolgreich Registriert")
 } catch (err) {
     throw new Error(`Fehler beim Deploy von den Slash Commands! Error: ${err}`)
 }
