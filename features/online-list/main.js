@@ -12,6 +12,7 @@ const cookie = data.features["online-list"].cookie;
 
 // Admins online mit Rechten
 
+try {
 const response = await fetch(
     `https://groups.roblox.com/v1/groups/${data.features["online-list"]["group-id"]}/roles/${data.features["online-list"]["admin-role"]}/users?limit=100`,
     {
@@ -25,8 +26,6 @@ const response = await fetch(
 
 const data89 = await response.json();
 
-console.log("[ROBLOX] Status:", response.status);
-console.log("[ROBLOX] Antwort:", data89);
 
 const ic_rechte_user = new Map(
     data89.data.map(user => [
@@ -63,10 +62,13 @@ for (const presence of data1.userPresences) {
         ingameAdmins.push(ic_rechte_user.get(presence.userId));
     }
 }
-
+} catch (err) {
+    console.log(`[ONLINE Liste] Fehler: ${err}`)
+}
 
 // Admins ohne ic Rechte
 
+try {
 
 const response5 = await fetch(
     `https://groups.roblox.com/v1/groups/${data.features["online-list"]["group-id"]}/roles/${data.features["online-list"]["no_right_role"]}/users?limit=100`,
@@ -117,7 +119,9 @@ for (const presence of data6.userPresences) {
     }
 }
 
-
+} catch (err) {
+    console.log(`[ONLINE Liste] Fehler: ${err}`)
+}
 
 // Admins online auf Roblox
 
