@@ -42,10 +42,9 @@ client.on("interactionCreate", async interaction => {
             .setTitle("⚙️ Command ausgeführt")
             .setColor("Blue")
             .setDescription(
-                `**User:** <@${interaction.user.id}>\n` +
-                `**Command:** \`/${interaction.commandName}\`\n` +
-                `**Kanal:** <#${interaction.channelId}>\n` +
-                `**Server:** ${interaction.guild ? interaction.guild.name : "DM"}\n\n` +
+                `**User:**  <@${interaction.user.id}>\n` +
+                `**Command:**  \`/${interaction.commandName}\`\n` +
+                `**Kanal:**  <#${interaction.channelId}>\n\n` +
                 `**Optionen:**\n` +
                 `${options.length > 0 ? options.join("\n") : "Keine"}`
             )
