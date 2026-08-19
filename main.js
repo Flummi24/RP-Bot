@@ -2,7 +2,6 @@ const preload = require("./utils/preload.js");
 
 (async () => {
     await preload()
-})()
 
 require("dotenv").config({
     path: "../data/.env"
@@ -44,3 +43,5 @@ if (data["http-server"].enabled) {
 
 const TOKEN = process.env.TOKEN;
 client.login(TOKEN)
+
+})()
