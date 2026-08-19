@@ -13,8 +13,7 @@
   },
   "features": {
     "anti-nuke": {
-      "enabled": false,
-      "excluded-role-id": 123456789
+      "enabled": false
     },
     "auto-nickname": {
       "enabled": false,

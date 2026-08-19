@@ -36,6 +36,13 @@ module.exports = (async () => {
                 );
 
                 await reset();
+
+                console.log("[Preload] Erfolgreich Data Ordner Erstellt")
+                console.log("\n================================================")
+                console.log("Web Panel:")
+                console.log("  Username: admin")
+                console.log(  "Passwort: admin")
+                console.log("================================================")
             } else {
                 throw err;
             }
