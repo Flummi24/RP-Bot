@@ -197,7 +197,8 @@ for (const id of data.features["online-list"]["channels"]) {
         await channel.bulkDelete(100);
         await channel.send({ flags: 1 << 15, components: [message] });
     } else {
-        channel.send({ embeds: [message] })
+        await channel.bulkDelete(100);
+        await channel.send({ embeds: [message] })
     }
 }
 }

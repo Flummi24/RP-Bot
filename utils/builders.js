@@ -1,7 +1,7 @@
 const { EmbedBuilder, ActionRowBuilder, ContainerBuilder, TextDisplayBuilder, MediaGalleryBuilder } = require("discord.js")
 const data = require("../data/data.json")
 
-async function container_builder(title, content) {
+function container_builder(title, content) {
     const container = new ContainerBuilder()
   .addTextDisplayComponents(
     new TextDisplayBuilder()
@@ -23,7 +23,7 @@ async function container_builder(title, content) {
   return container
 }
 
-async function embed_builder(title, content, color) {
+function embed_builder(title, content, color) {
     const embed = new EmbedBuilder()
         .setTitle(title)
         .setColor(color)
