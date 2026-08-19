@@ -53,7 +53,7 @@ const data1 = await response1.json();
 for (const presence of data1.userPresences) {
     if (
         presence.userPresenceType === 2 &&
-        presence.placeId === TARGET_PLACE_ID &&
+        presence.placeId === 7711635737 &&
         presence.gameId === GAME_ID
     ) {
         ingameAdmins.push(ic_rechte_user.get(presence.userId));
@@ -106,7 +106,7 @@ const data6 = await response6.json();
 for (const presence of data6.userPresences) {
     if (
         presence.userPresenceType === 2 &&
-        presence.placeId === TARGET_PLACE_ID &&
+        presence.placeId === 7711635737 &&
         presence.gameId === GAME_ID
     ) {
         ohneAdmins.push(user.get(presence.userId));
@@ -121,7 +121,7 @@ for (const presence of data6.userPresences) {
 for (const presence of data6.userPresences) {
     if (
         presence.userPresenceType === 2 &&
-        presence.placeId !== TARGET_PLACE_ID &&
+        presence.placeId !== 7711635737 &&
         presence.placeId
     ) {
         robloxAdmins.push(user.get(presence.userId));
@@ -131,7 +131,7 @@ for (const presence of data6.userPresences) {
 for (const presence of data1.userPresences) {
     if (
         presence.userPresenceType === 2 &&
-        presence.placeId !== TARGET_PLACE_ID &&
+        presence.placeId !== 7711635737 &&
         presence.placeId
     ) {
         robloxAdmins.push(ic_rechte_user.get(presence.userId));

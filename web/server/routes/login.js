@@ -1,4 +1,5 @@
 const db = require("../../../utils/database.js")
+const data = require("../../../data/data.json")
 
 module.exports = async (api) => {
     api.post("/api/login", async (req, res) => {

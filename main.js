@@ -26,6 +26,11 @@ const utils = require("./features/messages/main.js")
 utils(client)
 }
 
+if (data.features["online-list"].enabled) {
+    const online = require("./features/online-list/main.js")
+    online(client)
+}
+
 
 if (data["http-server"].enabled) {
     const web = require("./web/server/main.js")
