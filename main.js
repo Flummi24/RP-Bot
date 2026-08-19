@@ -9,6 +9,9 @@ require("dotenv").config({
 
 const client = require("./init/client.js")
 
+const ready = require("./events/ready.js")
+ready(client)
+
 const commands = require("./commands/builder.js")
 const deploy = require("./utils/deploy.js")
 deploy(commands)
