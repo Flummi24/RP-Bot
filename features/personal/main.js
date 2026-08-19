@@ -2,6 +2,7 @@ const { generate, create, remove, edit, hat, getall } = require("./functions.js"
 const check = require("../../utils/permissions.js")
 const roblox = require("../../utils/rblx.js")
 const output = require("../../utils/output.js")
+const data = require("../../data/data.json")
 
 module.exports = async (client) => {
     console.log("[Ausweis] Loading")
