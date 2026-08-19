@@ -4,6 +4,7 @@ const roblox = require("../../utils/rblx.js")
 const output = require("../../utils/output.js")
 
 module.exports = async (client) => {
+    console.log("[Ausweis] Loading")
     client.on('interactionCreate', async interaction => {
         try {
             if (!interaction.isChatInputCommand()) return;
@@ -97,4 +98,5 @@ module.exports = async (client) => {
             return console.log(`[Ausweis] Fehler: ${err}`)
         }
     });
+    console.log("[Ausweis] Ready")
 }
