@@ -22,7 +22,7 @@ module.exports = (client) => {
     const inviter = entry.executor;
 
     if (data.logging.enabled === true && data.logging["anti-nuke"]) {
-        const channel = await client.channels.fetch(data.logging.channel);
+        const channel = await client.channels.fetch(data.logging["channel-id"]);
 
         const message = output('⚠️ Anti Nuke', `\n**User**: <@${inviter.id}>\n**Bot**: <@${member.id}>\n**Aktionen**: Ban`, 'Red')
 
