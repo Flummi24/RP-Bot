@@ -37,7 +37,9 @@
       "enabled": false
     },
     "personal": {
-      "enabled": false
+      "enabled": false,
+      "min-haus-zahl": 1,
+      "max-haus-zahl": 46
     }
   },
   "logging": {

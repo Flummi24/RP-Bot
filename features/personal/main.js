@@ -186,21 +186,16 @@ if (interaction.commandName === 'führerschein') {
 
 if (interaction.commandName === "häuser") {
 
+    const subcommand = interaction.options.getSubcommand();
+
     const ok = await check(interaction.member);
 
     if (ok) {
         return interaction.reply(ok);
     }
 
-    const subcommand = interaction.options.getSubcommand();
-
-    const username = interaction.options
-        .getString("username")
-        .toLowerCase();
-
-    const haus = interaction.options
-        .getString("haus")
-        .trim();
+    const username = interaction.options.getString("username").toLowerCase();
+    const haus = interaction.options.getString("haus").trim();
 
     const hat_perso = await hat(username);
 
@@ -209,6 +204,29 @@ if (interaction.commandName === "häuser") {
             "Dieser User hat keinen Personalausweis!"
         );
     }
+
+    const min = data.features.personal["min-haus-zahl"];
+    const max = data.features.personal["max-haus-zahl"];
+
+    const regex = haus.match(/^Haus ([0-9]+)$/i);
+
+    if (!regex) {
+        return interaction.reply({
+            content: `Ungültiges Format! Erlaubt: **Haus ${min} - ${max}**`,
+            ephemeral: true
+        });
+    }
+
+    const hausNummer = Number(regex[1]);
+
+    if (hausNummer < min || hausNummer > max) {
+        return interaction.reply({
+            content: `Ungültiges Haus! Erlaubt: **Haus ${min} - ${max}**`,
+            ephemeral: true
+        });
+    }
+
+    const hausName = `Haus ${hausNummer}`;
 
     if (subcommand === "add") {
 
@@ -222,10 +240,8 @@ if (interaction.commandName === "häuser") {
             haeuser = [];
         }
 
-        if (haeuser.includes(haus)) {
-            return interaction.reply(
-                `**${haus}** gehört diesem User bereits!`
-            );
+        if (haeuser.includes(hausName)) {
+            return interaction.reply(`Dem User ${username} gehört das Haus Bereits`);
         }
 
         const rows = await getall();
@@ -240,14 +256,12 @@ if (interaction.commandName === "häuser") {
                 userHaeuser = [];
             }
 
-            if (userHaeuser.includes(haus)) {
-                return interaction.reply(
-                    `Das Haus **${haus}** gehört bereits <@${user.discord_id || user.username}>!`
-                );
+            if (userHaeuser.includes(hausName)) {
+                return interaction.reply(`**${hausName}** gehört bereits **${user.username}**`);
             }
         }
 
-        haeuser.push(haus);
+        haeuser.push(hausName);
 
         const success = await edit(
             username,
@@ -262,11 +276,13 @@ if (interaction.commandName === "häuser") {
         }
 
         return interaction.reply(
-            `Das Haus **${haus}** wurde **${username}** hinzugefügt.`
+            output(
+                "🏠 Haus hinzugefügt",
+                `**Username:** ${username}\n\n**Haus:** ${hausName}`,
+                "Green"
+            )
         );
     }
-
-
 
     if (subcommand === "remove") {
 
@@ -280,13 +296,13 @@ if (interaction.commandName === "häuser") {
             haeuser = [];
         }
 
-        if (!haeuser.includes(haus)) {
-            return interaction.reply(
-                `**${haus}** gehört diesem User nicht!`
-            );
+        if (!haeuser.includes(hausName)) {
+            return interaction.reply(`**Der User ${username}** besitzt **${hausName}** nicht`);
         }
 
-        haeuser = haeuser.filter(h => h !== haus);
+        haeuser = haeuser.filter(
+            h => h !== hausName
+        );
 
         const success = await edit(
             username,
@@ -296,12 +312,16 @@ if (interaction.commandName === "häuser") {
 
         if (!success) {
             return interaction.reply(
-                "Fehler beim Entfernen vom Haus"
+                "Fehler beim Entfernen des Hauses!"
             );
         }
 
         return interaction.reply(
-            `Das Haus **${haus}** wurde von **${username}** entfernt`
+            output(
+                "🏠 Haus entfernt",
+                `**Username:** ${username}\n\n**Haus:** ${hausName}`,
+                "Red"
+            )
         );
     }
 }
@@ -348,7 +368,7 @@ if (interaction.commandName === "waffenschein") {
             }[typ];
 
             if (!feld) {
-                return interaction.reply("Ungültiger Typ!");
+                return interaction.reply("Ungültiger Typ");
             }
 
             const success = await edit(
@@ -366,8 +386,8 @@ if (interaction.commandName === "waffenschein") {
 
         return interaction.reply(
             output(
-                "Waffenschein vergeben",
-                `**Username:** ${username}\n**Typ:** ${typ}`,
+                "🔫 Waffenschein vergeben",
+                `**Username:** ${username}\n\n**Typ:** ${typ}`,
                 "Green"
             )
         );
@@ -389,7 +409,7 @@ if (interaction.commandName === "waffenschein") {
             }[typ];
 
             if (!feld) {
-                return interaction.reply("Ungültiger Typ!");
+                return interaction.reply("Ungültiger Typ");
             }
 
             const success = await edit(
@@ -407,8 +427,8 @@ if (interaction.commandName === "waffenschein") {
 
         return interaction.reply(
             output(
-                "Waffenschein entzogen",
-                `**Username:** ${username}\n**Typ:** ${typ}`,
+                "🔫 Waffenschein entzogen",
+                `**Username:** ${username}\n\n**Typ:** ${typ}`,
                 "Red"
             )
         );

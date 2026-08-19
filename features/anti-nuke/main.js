@@ -24,7 +24,7 @@ module.exports = (client) => {
     if (data.logging.enabled === true && data.logging["anti-nuke"]) {
         const channel = await client.channels.fetch(data.logging.channel);
 
-        const message = output('Anti Nuke', `\n**User**: <@${inviter.id}>\n**Bot**: <@${member.id}>\n**Aktionen**: Ban`, Red)
+        const message = output('⚠️ Anti Nuke', `\n**User**: <@${inviter.id}>\n**Bot**: <@${member.id}>\n**Aktionen**: Ban`, 'Red')
 
         if (data.discord["use-container"]) {
             channel.send(message);

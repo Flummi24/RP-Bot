@@ -39,7 +39,7 @@ module.exports = async (client) => {
         });
     }
 
-    const message = await output("Teamwarn", `**User**: <@${user.id}>\n**Grund**: ${grund}\n**Von**: <@${interaction.user.id}>\n**Datum**: ${new Date(datum).toLocaleString("de-DE")}`, "Red")
+    const message = await output("⚠️ Teamwarn", `**User**: <@${user.id}>\n**Grund**: ${grund}\n**Von**: <@${interaction.user.id}>\n**Datum**: ${new Date(datum).toLocaleString("de-DE")}`, "Red")
     return interaction.reply(message)
 
 });
@@ -81,7 +81,7 @@ module.exports = async (client) => {
             `**Datum:** ${new Date(w.datum).toLocaleString("de-DE")}`
         ).join("\n\n");
 
-        const message = await output(`Teamwarns von ${user.user.username}`, description, "Yellow");
+        const message = await output(`⚠️ Teamwarns von ${user.user.username}`, description, "Yellow");
 
         return interaction.reply(message);
     });
@@ -132,7 +132,7 @@ module.exports = async (client) => {
             });
         }
 
-        const message = await output( "Teamwarn entfernt", `**User**: <@${user.id}>\n**Gelöschte Warn ID**: ${warnId}\n**Warn Grund**: ${warn.reason}\n**Grund:** ${reason}`, "Yellow");
+        const message = await output("⚠️ Teamwarn entfernt", `**User**: <@${user.id}>\n**Gelöschte Warn ID**: ${warnId}\n**Warn Grund**: ${warn.reason}\n**Grund:** ${reason}`, "Yellow");
         return interaction.reply(message)
                 }
             );
