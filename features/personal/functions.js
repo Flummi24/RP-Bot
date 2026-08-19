@@ -35,6 +35,22 @@ function infos(username) {
     });
 }
 
+function getall() {
+    return new Promise((resolve, reject) => {
+        db.all(
+            "SELECT * FROM perso",
+            [],
+            (err, rows) => {
+                if (err) {
+                    return reject(err);
+                }
+
+                resolve(rows);
+            }
+        );
+    });
+}
+
 async function generate(username) {
 
 const row = await infos(username);
@@ -134,8 +150,8 @@ function add(username, name, geburt) {
     return new Promise((resolve) => {
         db.run(
             `INSERT INTO perso 
-            (username, name, geburt, pkw, lkw, motorrad, waffe_klein, waffe_groß) 
-            VALUES (?, ?, ?, 'false', 'false', 'false', 'false', 'false')`,
+            (username, name, geburt, pkw, lkw, motorrad, waffe_klein, waffe_groß, haeuser) 
+            VALUES (?, ?, ?, 'false', 'false', 'false', 'false', 'false', '')`,
             [username, name, geburt],
             function (err) {
                 if (err) {
@@ -215,5 +231,6 @@ module.exports = {
   'remove': remove,
   'edit': edit,
   'info': infos,
-  'hat': hat
+  'hat': hat,
+  'getall': getall
 }

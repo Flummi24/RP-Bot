@@ -56,7 +56,8 @@ async function reset() {
                 lkw TEXT,
                 motorrad TEXT,
                 waffe_klein TEXT,
-                waffe_groß TEXT
+                waffe_groß TEXT,
+                haeuser TEXT
             )
         `);
 

@@ -140,14 +140,64 @@ if (data.features.personal.enabled) {
     .addSubcommand(subcommand =>
       subcommand
         .setName('delete')
-        .setDescription('Zeigt einen Personalausweis')
+        .setDescription('Lösche einen Personalausweis')
         .addStringOption(option =>
           option.setName('username')
             .setDescription('Der Ingane @Name')
             .setRequired(true))
     ),
 
-    );
+    new SlashCommandBuilder()
+  .setName('führerschein')
+  .setDescription('Führerschein Verwaltung')
+
+  .addSubcommand(sub =>
+    sub
+      .setName('add')
+      .setDescription('Führerschein hinzufügen')
+      .addStringOption(option =>
+        option
+          .setName('username')
+          .setDescription('Der Ingame @Name')
+          .setRequired(true))
+      .addStringOption(option =>
+        option
+          .setName('typ')
+          .setDescription('Führerschein Typ')
+          .setRequired(true)
+          .addChoices(
+            { name: 'PKW', value: 'PKW' },
+            { name: 'LKW', value: 'LKW' },
+            { name: 'Motorrad', value: 'Motorrad' },
+            { name: 'ALL', value: 'ALL' }
+          )
+      )
+  )
+  .addSubcommand(sub =>
+    sub
+      .setName('remove')
+      .setDescription('Führerschein entfernen')
+      .addStringOption(option =>
+        option
+          .setName('username')
+          .setDescription('Der Ingame @Name')
+          .setRequired(true))
+      .addStringOption(option =>
+        option
+          .setName('typ')
+          .setDescription('Führerschein Typ')
+          .setRequired(true)
+          .addChoices(
+            { name: 'PKW', value: 'PKW' },
+            { name: 'LKW', value: 'LKW' },
+            { name: 'Motorrad', value: 'Motorrad' },
+            { name: 'ALL', value: 'ALL' }
+          )
+      )
+  ),
+
+
+    )
 }
 
 if (data.features.teamwarns.enabled) {

@@ -1,4 +1,4 @@
-const { generate, create, remove, edit, hat } = require("./functions.js")
+const { generate, create, remove, edit, hat, getall } = require("./functions.js")
 const check = require("../../utils/permissions.js")
 const roblox = require("../../utils/rblx.js")
 const output = require("../../utils/output.js")
@@ -93,6 +93,224 @@ module.exports = async (client) => {
                     }
                 }
             }
+
+if (interaction.commandName === 'führerschein') {
+    const subcommand = interaction.options.getSubcommand();
+
+    const ok = await check(interaction.member);
+
+    if (ok) {
+        return interaction.reply(ok);
+    }
+
+    const username = interaction.options.getString("username").toLowerCase();
+    const typ = interaction.options.getString("typ");
+
+    const hat_perso = await hat(username);
+
+    if (!hat_perso) {
+        return interaction.reply(
+            "Dieser User hat keinen Personalausweis!"
+        );
+    }
+
+    const führerscheine = {
+        PKW: "pkw",
+        LKW: "lkw",
+        Motorrad: "motorrad"
+    };
+
+    if (subcommand === "add") {
+
+        if (typ === "ALL") {
+            await edit(username, "pkw", "true");
+            await edit(username, "lkw", "true");
+            await edit(username, "motorrad", "true");
+        } else {
+            const feld = führerscheine[typ];
+
+            if (!feld) {
+                return interaction.reply("Ungültiger Führerschein-Typ!");
+            }
+
+            const success = await edit(username, feld, "true");
+
+            if (!success) {
+                return interaction.reply(
+                    "Fehler beim Vergeben des Führerscheins!"
+                );
+            }
+        }
+
+        return interaction.reply(
+            output(
+                "Führerschein vergeben",
+                `**Username:** ${username}\n**Typ:** ${typ}`,
+                "Green"
+            )
+        );
+    }
+
+    if (subcommand === "remove") {
+
+        if (typ === "ALL") {
+            await edit(username, "pkw", "false");
+            await edit(username, "lkw", "false");
+            await edit(username, "motorrad", "false");
+        } else {
+            const feld = führerscheine[typ];
+
+            if (!feld) {
+                return interaction.reply("Ungültiger Führerschein-Typ!");
+            }
+
+            const success = await edit(username, feld, "false");
+
+            if (!success) {
+                return interaction.reply(
+                    "Fehler beim Entziehen des Führerscheins!"
+                );
+            }
+        }
+
+        return interaction.reply(
+            output(
+                "Führerschein entzogen",
+                `**Username:** ${username}\n**Typ:** ${typ}`,
+                "Red"
+            )
+        );
+    }
+}
+
+
+if (interaction.commandName === "häuser") {
+
+    const check1 = await check(interaction.member);
+
+    if (check1) {
+        return interaction.reply(check1);
+    }
+
+    const subcommand = interaction.options.getSubcommand();
+
+    const username = interaction.options
+        .getString("username")
+        .toLowerCase();
+
+    const haus = interaction.options
+        .getString("haus")
+        .trim();
+
+    const hat_perso = await hat(username);
+
+    if (!hat_perso) {
+        return interaction.reply(
+            "Dieser User hat keinen Personalausweis!"
+        );
+    }
+
+
+    // =========================
+    // HAUS HINZUFÜGEN
+    // =========================
+
+    if (subcommand === "add") {
+
+        const row = await info(username);
+
+        let haeuser;
+
+        try {
+            haeuser = JSON.parse(row.haeuser || "[]");
+        } catch {
+            haeuser = [];
+        }
+
+        if (haeuser.includes(haus)) {
+            return interaction.reply(
+                `**${haus}** gehört diesem User bereits!`
+            );
+        }
+
+        const rows = await getall();
+
+        for (const user of rows) {
+
+            let userHaeuser;
+
+            try {
+                userHaeuser = JSON.parse(user.haeuser || "[]");
+            } catch {
+                userHaeuser = [];
+            }
+
+            if (userHaeuser.includes(haus)) {
+                return interaction.reply(
+                    `Das Haus **${haus}** gehört bereits <@${user.discord_id || user.username}>!`
+                );
+            }
+        }
+
+        haeuser.push(haus);
+
+        const success = await edit(
+            username,
+            "haeuser",
+            JSON.stringify(haeuser)
+        );
+
+        if (!success) {
+            return interaction.reply(
+                "Fehler beim Hinzufügen des Hauses!"
+            );
+        }
+
+        return interaction.reply(
+            `Das Haus **${haus}** wurde **${username}** hinzugefügt.`
+        );
+    }
+
+
+
+    if (subcommand === "remove") {
+
+        const row = await info(username);
+
+        let haeuser;
+
+        try {
+            haeuser = JSON.parse(row.haeuser || "[]");
+        } catch {
+            haeuser = [];
+        }
+
+        if (!haeuser.includes(haus)) {
+            return interaction.reply(
+                `**${haus}** gehört diesem User nicht!`
+            );
+        }
+
+        haeuser = haeuser.filter(h => h !== haus);
+
+        const success = await edit(
+            username,
+            "haeuser",
+            JSON.stringify(haeuser)
+        );
+
+        if (!success) {
+            return interaction.reply(
+                "Fehler beim Entfernen vom Haus"
+            );
+        }
+
+        return interaction.reply(
+            `Das Haus **${haus}** wurde von **${username}** entfernt`
+        );
+    }
+}
+
 
         } catch (err) {
             return console.log(`[Ausweis] Fehler: ${err}`)
