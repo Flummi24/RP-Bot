@@ -161,7 +161,7 @@ async function create(username, name, geburt) {
 function remove_func(username) {
     return new Promise((resolve) => {
         db.run(
-            "DELETE FROM perso WHERE username = ? LIMIT 1",
+            "DELETE FROM perso WHERE username = ?",
             [username],
             function (err) {
                 if (err) {
