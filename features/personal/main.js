@@ -144,7 +144,7 @@ if (interaction.commandName === 'führerschein') {
 
         return interaction.reply(
             output(
-                "Führerschein vergeben",
+                "🚗 Führerschein vergeben",
                 `**Username:** ${username}\n**Typ:** ${typ}`,
                 "Green"
             )
@@ -175,7 +175,7 @@ if (interaction.commandName === 'führerschein') {
 
         return interaction.reply(
             output(
-                "Führerschein entzogen",
+                "🚗 Führerschein entzogen",
                 `**Username:** ${username}\n**Typ:** ${typ}`,
                 "Red"
             )
