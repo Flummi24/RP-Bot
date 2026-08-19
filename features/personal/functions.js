@@ -146,9 +146,9 @@ if (waffe_groß) waffenscheine.push("Groß");
 
     bild.fillText(`Name: ${name}`, 22, 125);
     bild.fillText(`Geburtsdatum: ${geburt}`, 22, 160);
-    bild.fillText(`Führerscheine: ${scheine.join(", ") || "Keine"}`, 22, 235);
-    bild.fillText(`Großer Waffenschein: ${waffe_groß ? "Ja" : "Nein"}`, 22, 270);
-    bild.fillText(`Kleiner Waffenschein: ${waffe_klein ? "Ja" : "Nein"}`, 22, 305);
+    bild.fillText(`Führerscheine: ${scheine.join(", ") || "Keine"}`, 22, 220);
+    bild.fillText(`Großer Waffenschein: ${waffe_groß ? "Ja" : "Nein"}`, 22, 255);
+    bild.fillText(`Kleiner Waffenschein: ${waffe_klein ? "Ja" : "Nein"}`, 22, 290);
 
     const buffer = canvas.toBuffer('image/png');
 
