@@ -3,6 +3,63 @@ const { EmbedBuilder } = require("discord.js")
 
 module.exports = (client) => {
     console.log("[Logging] Loading")
+client.on("interactionCreate", async interaction => {
+
+    if (!interaction.isChatInputCommand()) return;
+
+    if (!data.logging.commands) return;
+
+    try {
+
+        const channel = await client.channels.fetch(
+            data.logging["channel-id"]
+        );
+
+        const options = [];
+
+        for (const option of interaction.options.data) {
+
+            let value = option.value;
+
+            if (option.type === 6) {
+                value = `<@${option.value}>`;
+            }
+
+            if (option.type === 7) {
+                value = `<#${option.value}>`;
+            }
+
+            if (option.type === 8) {
+                value = `<@&${option.value}>`;
+            }
+
+            options.push(
+                `**${option.name}:** ${value}`
+            );
+        }
+
+        const embed = new EmbedBuilder()
+            .setTitle("⚙️ Command ausgeführt")
+            .setColor("Blue")
+            .setDescription(
+                `**User:** <@${interaction.user.id}>\n` +
+                `**Command:** \`/${interaction.commandName}\`\n` +
+                `**Kanal:** <#${interaction.channelId}>\n` +
+                `**Server:** ${interaction.guild ? interaction.guild.name : "DM"}\n\n` +
+                `**Optionen:**\n` +
+                `${options.length > 0 ? options.join("\n") : "Keine"}`
+            )
+            .setTimestamp();
+
+        await channel.send({
+            embeds: [embed]
+        });
+
+    } catch (err) {
+        console.error("[Logging] Command-Log Fehler:", err);
+    }
+});
+
 client.on("messageDelete", async (message) => {
     if (message.author.bot) return;
 
