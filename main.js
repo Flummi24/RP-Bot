@@ -4,7 +4,7 @@ const preload = require("./utils/preload.js");
     await preload()
 
 require("dotenv").config({
-    path: "../data/.env"
+    path: "./data/.env"
 });
 
 const client = require("./init/client.js")

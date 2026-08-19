@@ -41,7 +41,7 @@ async function preload(params) {
                 console.log("\n================================================")
                 console.log(`Web Panel:`)
                 console.log("  Username: admin")
-                console.log(  "Passwort: admin")
+                console.log("  Passwort: admin")
                 console.log("================================================")
             } else {
                 throw err;
