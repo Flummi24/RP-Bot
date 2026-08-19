@@ -60,19 +60,38 @@ const row = await infos(username);
     return false
   }
 
-  const name = row.name
-  const geburt = row.geburt
-  const pkw = row.pkw === "true";
-  const lkw = row.lkw === "true";
-  const motorrad = row.motorrad === "true";
-  const waffe_klein = row.waffe_klein === "true";
-  const waffe_groß = row.waffe_groß === "true";
+  const name = row.name;
+const geburt = row.geburt;
 
+const pkw = row.pkw === "true";
+const lkw = row.lkw === "true";
+const motorrad = row.motorrad === "true";
 
-  const scheine = [];
-  if (pkw) scheine.push("PKW");
-  if (lkw) scheine.push("LKW");
-  if (motorrad) scheine.push("Motorrad");
+const waffe_klein = row.waffe_klein === "true";
+const waffe_groß = row.waffe_groß === "true";
+
+let haeuser = [];
+
+try {
+    haeuser = JSON.parse(row.haeuser || "[]");
+
+    if (!Array.isArray(haeuser)) {
+        haeuser = [];
+    }
+} catch {
+    haeuser = [];
+}
+
+const scheine = [];
+
+if (pkw) scheine.push("PKW");
+if (lkw) scheine.push("LKW");
+if (motorrad) scheine.push("Motorrad");
+
+const waffenscheine = [];
+
+if (waffe_klein) waffenscheine.push("Klein");
+if (waffe_groß) waffenscheine.push("Groß");
 
   
 

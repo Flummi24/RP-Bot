@@ -1,7 +1,6 @@
-// /container /embed /say etc
-
 const data = require("../../data/data.json")
 const check = require("../../utils/permissions.js")
+const { EmbedBuilder, ContainerBuilder, MediaGalleryBuilder, TextDisplayBuilder } = require("discord.js")
 
 module.exports = async (client) => {
     console.log("[Utils] Loading")
