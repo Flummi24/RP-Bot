@@ -1,8 +1,9 @@
 const data = require("../data/data.json")
 
 async function check(member) {
-    if (!member.roles.cache.has(data["admin-role"])) {
-            return { content: `Dir fehlen die folgenden Rechte: ${data["admin-role"]}`, ephemeral: true };
+    const roles = await member.roles.fetch();
+    if (!roles.has(data["admin-role"])) {
+            return { content: `Dir fehlen die folgenden Rechte: <@${data["admin-role"]}>`, ephemeral: true };
     } else {
         return false
     }
