@@ -186,10 +186,10 @@ if (interaction.commandName === 'führerschein') {
 
 if (interaction.commandName === "häuser") {
 
-    const check1 = await check(interaction.member);
+    const ok = await check(interaction.member);
 
-    if (check1) {
-        return interaction.reply(check1);
+    if (ok) {
+        return interaction.reply(ok);
     }
 
     const subcommand = interaction.options.getSubcommand();
@@ -209,11 +209,6 @@ if (interaction.commandName === "häuser") {
             "Dieser User hat keinen Personalausweis!"
         );
     }
-
-
-    // =========================
-    // HAUS HINZUFÜGEN
-    // =========================
 
     if (subcommand === "add") {
 
@@ -307,6 +302,115 @@ if (interaction.commandName === "häuser") {
 
         return interaction.reply(
             `Das Haus **${haus}** wurde von **${username}** entfernt`
+        );
+    }
+}
+
+
+if (interaction.commandName === "waffenschein") {
+
+    const subcommand = interaction.options.getSubcommand();
+
+    const ok = await check(interaction.member);
+
+    if (ok) {
+        return interaction.reply(ok);
+    }
+
+    const username = interaction.options
+        .getString("username")
+        .toLowerCase();
+
+    const typ = interaction.options.getString("typ");
+
+    const hat_perso = await hat(username);
+
+    if (!hat_perso) {
+        return interaction.reply(
+            "Dieser User hat keinen Personalausweis!"
+        );
+    }
+
+
+
+    if (subcommand === "add") {
+
+        if (typ === "ALL") {
+
+            await edit(username, "waffe_klein", "true");
+            await edit(username, "waffe_groß", "true");
+
+        } else {
+
+            const feld = {
+                "Klein": "waffe_klein",
+                "Groß": "waffe_groß"
+            }[typ];
+
+            if (!feld) {
+                return interaction.reply("Ungültiger Typ!");
+            }
+
+            const success = await edit(
+                username,
+                feld,
+                "true"
+            );
+
+            if (!success) {
+                return interaction.reply(
+                    "Fehler beim Vergeben des Waffenscheins!"
+                );
+            }
+        }
+
+        return interaction.reply(
+            output(
+                "Waffenschein vergeben",
+                `**Username:** ${username}\n**Typ:** ${typ}`,
+                "Green"
+            )
+        );
+    }
+
+
+    if (subcommand === "remove") {
+
+        if (typ === "ALL") {
+
+            await edit(username, "waffe_klein", "false");
+            await edit(username, "waffe_groß", "false");
+
+        } else {
+
+            const feld = {
+                "Klein": "waffe_klein",
+                "Groß": "waffe_groß"
+            }[typ];
+
+            if (!feld) {
+                return interaction.reply("Ungültiger Typ!");
+            }
+
+            const success = await edit(
+                username,
+                feld,
+                "false"
+            );
+
+            if (!success) {
+                return interaction.reply(
+                    "Fehler beim Entziehen des Waffenscheins!"
+                );
+            }
+        }
+
+        return interaction.reply(
+            output(
+                "Waffenschein entzogen",
+                `**Username:** ${username}\n**Typ:** ${typ}`,
+                "Red"
+            )
         );
     }
 }

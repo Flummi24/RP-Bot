@@ -197,7 +197,95 @@ if (data.features.personal.enabled) {
   ),
 
 
+  new SlashCommandBuilder()
+  .setName('waffenschein')
+  .setDescription('Waffenschein Verwaltung')
+
+  .addSubcommand(sub =>
+    sub
+      .setName('add')
+      .setDescription('Waffenschein hinzufügen')
+      .addStringOption(option =>
+        option
+          .setName('username')
+          .setDescription('Der Ingame @Name')
+          .setRequired(true))
+      .addStringOption(option =>
+        option
+          .setName('typ')
+          .setDescription('Waffenschein Typ')
+          .setRequired(true)
+          .addChoices(
+            { name: 'Groß', value: 'Groß' },
+            { name: 'Klein', value: 'Klein' },
+            { name: 'ALL', value: 'ALL' }
+          )
+      )
+  )
+  .addSubcommand(sub =>
+    sub
+      .setName('remove')
+      .setDescription('Waffenschein entfernen')
+      .addStringOption(option =>
+        option
+          .setName('username')
+          .setDescription('Der Ingame @Name')
+          .setRequired(true))
+      .addStringOption(option =>
+        option
+          .setName('typ')
+          .setDescription('Waffenschein Typ')
+          .setRequired(true)
+          .addChoices(
+            { name: 'Groß', value: 'Groß' },
+            { name: 'Klein', value: 'Klein' },
+            { name: 'ALL', value: 'ALL' }
+          )
+      )
+  ),
+
+  new SlashCommandBuilder()
+    .setName("häuser")
+    .setDescription("Hausverwaltung")
+
+    .addSubcommand(sub =>
+        sub
+            .setName("add")
+            .setDescription("Haus hinzufügen")
+            .addStringOption(option =>
+                option
+                    .setName("username")
+                    .setDescription("Der Ingame @Name")
+                    .setRequired(true)
+            )
+            .addStringOption(option =>
+                option
+                    .setName("haus")
+                    .setDescription("Hausname")
+                    .setRequired(true)
+            )
     )
+
+    .addSubcommand(sub =>
+        sub
+            .setName("remove")
+            .setDescription("Haus entfernen")
+            .addStringOption(option =>
+                option
+                    .setName("username")
+                    .setDescription("Der Ingame @Name")
+                    .setRequired(true)
+            )
+            .addStringOption(option =>
+                option
+                    .setName("haus")
+                    .setDescription("Hausname")
+                    .setRequired(true)
+            )
+    ),
+
+
+)
 }
 
 if (data.features.teamwarns.enabled) {
