@@ -39,11 +39,16 @@ async function preload(params) {
                 await reset();
 
                 console.log("[Preload] Erfolgreich Data Ordner Erstellt")
+
                 console.log("\n================================================")
                 console.log(`Web Panel:`)
                 console.log("  Username: admin")
                 console.log("  Passwort: admin")
                 console.log("================================================")
+
+                console.log("\n")
+                console.log('Bitte Discord TOKEN und CLIENT_ID Einfügen in "/data/.env" und dann Bot Neustarten!')
+
 
                 process.exit(0)
             } else {
