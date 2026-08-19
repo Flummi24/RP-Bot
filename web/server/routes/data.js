@@ -1,3 +1,5 @@
+module.exports = (api) => {
+
 api.get("/api/data", async (req, res) => {
 
     const auth = req.query.auth;
@@ -61,3 +63,5 @@ api.get("/api/data", async (req, res) => {
         }
     );
 });
+
+}
