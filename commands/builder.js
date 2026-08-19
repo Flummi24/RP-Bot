@@ -150,7 +150,7 @@ if (data.features.personal.enabled) {
     );
 }
 
-if (true) {
+if (data.features.teamwarns.enabled) {
     commands.push(
     new SlashCommandBuilder()
     .setName('teamwarn')
@@ -190,6 +190,20 @@ if (true) {
 )
     )
 
+}
+
+if (data.features["online-list"].enabled) {
+  commands.push(
+    new SlashCommandBuilder()
+      .setName('setgameid')
+     .setDescription('Setze die Game ID für die Online Liste')
+     .addStringOption(option =>
+					option
+						.setName('username')
+						.setDescription('Dein IC Username')
+						.setRequired(true)
+       )
+  )
 }
 
 module.exports = commands.map(command => command.toJSON());;
