@@ -35,7 +35,6 @@ async function userToId(username) {
 }
 
 module.exports = async (client) => {
-    console.log("[ONLINE Liste] Loading");
 
     client.on("interactionCreate", async interaction => {
         try {

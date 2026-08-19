@@ -29,7 +29,7 @@ module.exports = async (client) => {
 
                     const username = interaction.options.getString('username').toLowerCase();
                     const name = interaction.options.getString('name')
-                    const geburt = interaction.options.getString('geburt')
+                    const geburt = interaction.options.getString('geburtsdatum')
 
                     const hat_perso = await hat(username);
 
@@ -51,7 +51,7 @@ module.exports = async (client) => {
                     
                 }
 
-                if (subcommand === 'remove') {
+                if (subcommand === 'delete') {
                     const username = interaction.options.getString('username').toLowerCase();
                     const check1 = await check(interaction.member)
                      if (check1) {
