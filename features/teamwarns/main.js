@@ -116,7 +116,7 @@ module.exports = async (client) => {
             db.run(
                 `DELETE FROM tw WHERE id = ?`,
                 [warnId],
-                function (err) {
+                async function (err) {
 
                     if (err) {
             console.error("Fehler in der Datenbank:", err);
