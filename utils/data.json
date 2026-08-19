@@ -1,50 +1,51 @@
 {
-    "server-name": "German RP",
-    "admin-role": 123456789,
-    "http-server": {
-        "enabled": true,
-        "port": 3000
+  "server-name": "DATA",
+  "admin-role": 123456789,
+  "http-server": {
+    "enabled": true,
+    "port": 3000
+  },
+  "discord": {
+    "status": "EH RP Bot",
+    "use-container": true,
+    "use-footer": false,
+    "footer-url": ""
+  },
+  "features": {
+    "anti-nuke": {
+      "enabled": false,
+      "excluded-role-id": 123456789
     },
-    "discord": {
-        "status": "EH RP Bot",
-        "use-container": true,
-        "use-footer": false,
-        "footer-url": ""
+    "auto-nickname": {
+      "enabled": false,
+      "status": "NICHT VERFÜGBAR"
     },
-    "features": {
-        "anti-nuke": {
-            "enabled": false,
-            "excluded-role-id": 123456789
-        },
-        "auto-nickname": {
-            "enabled": false,
-            "status": "NICHT VERFÜGBAR"
-        },
-        "online-list": {
-            "enabled": false,
-            "channels": [],
-            "formart": "# Online Liste\n**Online mit Rechten**\n{ONLINE_MIT_RECHTEN}\n**Online Ohne Rechte**\n{ONLINE_OHNE_RECHTE}\n**Online Auf Roblox**\n{ONLINE_ROBLOX}\n**Unbekannt**\n{UNBEKANNT}\n\n**Zuletzt aktualisiert:** {TIMESTAMP}",
-            "game-id": "",
-            "cookie": "123",
-            "group-id": 123456789,
-            "admin-role": 255,
-            "no_right_role": 254
-        },
-        "teamwarns": {
-            "enabled": false,
-            "idk": 1
-        },
-        "utils": {
-            "enabled": false
-        },
-        "personal": {
-            "enabled": false
-        }
+    "online-list": {
+      "enabled": false,
+      "channels": [],
+      "formart": "# Online Liste\n**Online mit Rechten**\n{ONLINE_MIT_RECHTEN}\n**Online Ohne Rechte**\n{ONLINE_OHNE_RECHTE}\n**Online Auf Roblox**\n{ONLINE_ROBLOX}\n**Unbekannt**\n{UNBEKANNT}\n\n**Zuletzt aktualisiert:** {TIMESTAMP}",
+      "game-id": "",
+      "cookie": "123",
+      "group-id": 123456789,
+      "admin-role": 255,
+      "no_right_role": 254
     },
-    "logging": {
-        "enabled": false,
-        "channel-id": 123456789,
-        "anti-nuke": true,
-        "commands": true
+    "teamwarns": {
+      "enabled": false,
+      "idk": 1
+    },
+    "utils": {
+      "enabled": false
+    },
+    "personal": {
+      "enabled": false
     }
+  },
+  "logging": {
+    "enabled": false,
+    "channel-id": 123456789,
+    "anti-nuke": true,
+    "commands": true,
+    "messages": true
+  }
 }
