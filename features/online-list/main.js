@@ -190,7 +190,7 @@ const split = text999.split("\n");
         
 const message = output(split[0], real, "Green")
 
-for (const id of data.features["online-list"]["channels"]) {
+for (const id of JSON.parse(data.features["online-list"]["channels"])) {
     const channel = await client.channels.fetch(id)
 
     if (data.discord["use-container"]) {

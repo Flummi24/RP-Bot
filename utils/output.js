@@ -1,7 +1,7 @@
 const { ebuilder, cbuilder } = require("./builders.js")
 const data = require("../data/data.json")
 
-function output(title, content, color) {
+async function output(title, content, color) {
     if (data.discord["use-container"]) {
         return { flags: 1 << 15, components: cbuilder(title, content) }
     } else {
