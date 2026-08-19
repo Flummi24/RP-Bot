@@ -1,8 +1,6 @@
 const preload = require("./utils/preload.js");
 
-(async () => {
-    await preload()
-})()
+await preload()
 
 require("dotenv").config({
     path: "../data/.env"

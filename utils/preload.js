@@ -4,7 +4,7 @@ const path = require("path");
 const restore = require(path.join(__dirname, "./data.json"));
 const reset = require(path.join(__dirname, "./reset-db.js"));
 
-module.exports = (async () => {
+async function preload(params) {
     console.log("[Startup] Preloading");
 
     const dataDir = path.join(__dirname, "../data");
@@ -73,4 +73,6 @@ module.exports = (async () => {
     }
 
     console.log("[Startup] Preloading Fertig");
-})();
+}
+
+module.exports = preload

@@ -18,7 +18,6 @@ async function reset() {
     try {
         const dbPath = path.join(__dirname, "../data/data.db");
 
-        // 1. Alte DB löschen
         try {
             await fs.unlink(dbPath);
             console.log("[RESET] Alte Datenbank gelöscht");
@@ -28,10 +27,8 @@ async function reset() {
             }
         }
 
-        // 2. Datenbank laden
         const db = require("./database.js");
 
-        // 3. users erstellen
         await run(db, `
             CREATE TABLE IF NOT EXISTS users (
                 username TEXT NOT NULL UNIQUE,
@@ -40,7 +37,6 @@ async function reset() {
             )
         `);
 
-        // 4. tw erstellen
         await run(db, `
             CREATE TABLE IF NOT EXISTS tw (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -51,7 +47,6 @@ async function reset() {
             )
         `);
 
-        // 5. perso erstellen
         await run(db, `
             CREATE TABLE IF NOT EXISTS perso (
                 username TEXT NOT NULL UNIQUE,
@@ -65,7 +60,6 @@ async function reset() {
             )
         `);
 
-        // 6. Admin erstellen
         const token = crypto.randomBytes(64).toString("hex");
 
         await run(
