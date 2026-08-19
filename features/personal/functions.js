@@ -1,7 +1,7 @@
 const db = require("../../utils/database.js")
 const { createCanvas, loadImage } = require("canvas");
-const { info } = require("console");
 const crypto = require("crypto")
+const path = require("path");
 
 function hat(username) {
     return new Promise((resolve, reject) => {
@@ -83,7 +83,7 @@ const row = await infos(username);
           
 
     // Canvas starten
-    const base = await loadImage('./background.png');
+    const base = await loadImage(path.join(__dirname, "./background.png"));
     const canvas = createCanvas(base.width, base.height);
     const bild = canvas.getContext('2d');
 
