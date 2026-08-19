@@ -8,6 +8,7 @@ const ingameAdmins = [];
 const ohneAdmins = []
 const robloxAdmins = [];
 const unknownAdmins = [];
+const cookie = data.features["online-list"].cookie;
 
 // Admins online mit Rechten
 
