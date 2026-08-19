@@ -38,6 +38,10 @@ if (data.features["online-list"].enabled) {
     online(client)
 }
 
+if (data.features.personal.enabled) {
+    const personal = require("./features/personal/main.js")
+}
+
 
 if (data["http-server"].enabled) {
     const web = require("./web/server/main.js")
