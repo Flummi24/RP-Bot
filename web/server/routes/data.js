@@ -1,3 +1,6 @@
+const db = require("../../../utils/database.js")
+const process = require("process")
+
 module.exports = (api) => {
 
 api.get("/api/data", async (req, res) => {
