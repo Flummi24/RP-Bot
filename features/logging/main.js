@@ -8,7 +8,7 @@ client.on("messageDelete", async (message) => {
     const channel = await client.channels.fetch(data.logging["channel-id"]);
 
 const embed = new EmbedBuilder()
-      .setTitle('Nachricht Logs')
+      .setTitle('Nachricht Gelöscht')
       .setColor('Yellow')
       .setDescription(`\n**User**: <@${message.author.id}> \n**Kanal**: <#${message.channel.id}> \n\n**Nachricht**: ${message.content || "Keine Nachricht"}\n\n **Nachrichten Link:** ${message.url}\n`)
       .setTimestamp();
@@ -22,7 +22,7 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
   const channel = await client.channels.fetch(data.logging["channel-id"]);
 
 const embed = new EmbedBuilder()
-      .setTitle('Nachricht Logs')
+      .setTitle('Nachricht Bearbeitet')
       .setColor('Yellow')
       .setDescription(`\n**User**: <@${newMessage.author.id}> \n**Kanal**: <#${newMessage.channel.id}> \n\n**Alte Nachricht**: ${oldMessage.content} \n**Neue Nachricht**: ${newMessage.content}\n\n **Nachrichten Link:** ${newMessage.url}\n`)
       .setTimestamp();
@@ -47,7 +47,7 @@ client.on('messageCreate', async message => {
   }
 
   const embed = new EmbedBuilder()
-    .setTitle('Nachrichten Logs')
+    .setTitle('Nachrichten Gesendet')
     .setColor('Yellow')
     .setDescription(
 `**User**: <@${message.author.id}>
