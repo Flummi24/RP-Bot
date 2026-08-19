@@ -15,7 +15,6 @@ const deploy = require("./utils/deploy.js")
 deploy(commands)
 
 const data = require("./data/data.json");
-const preload = require("./utils/preload.js");
 
 if (data.features["anti-nuke"].enabled) {
 const anti_nuke = require("./features/anti-nuke/main.js")
