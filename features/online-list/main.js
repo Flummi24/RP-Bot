@@ -25,6 +25,9 @@ const response = await fetch(
 
 const data89 = await response.json();
 
+console.log("[ROBLOX] Status:", response.status);
+console.log("[ROBLOX] Antwort:", data89);
+
 const ic_rechte_user = new Map(
     data89.data.map(user => [
         user.userId,
