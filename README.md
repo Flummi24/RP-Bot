@@ -5,4 +5,7 @@
 Einrichtung: 
 https://github.com/Flummi24/RP-Bot/wiki
 
-Bei **Fragen** oder **Problemem**: Discord: @Flummi_24 
+Bei **Fragen** oder **Problemem**: 
+```
+Discord: @Flummi_24 
+```
